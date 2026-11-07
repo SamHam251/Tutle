@@ -32,7 +32,7 @@ scale = Vector2(2, 2)
 position = Vector2(1107, 471)
 
 [node name="gay jail delete later" type="Node2D" parent="." unique_id=1473623612]
-position = Vector2(-58, 0)
+position = Vector2(114, -56)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="gay jail delete later" unique_id=500838062]
 position = Vector2(1105, 511)
@@ -49,4 +49,4 @@ position = Vector2(0, -48)
 shape = SubResource("RectangleShape2D_2fjjf")
 
 [node name="EnemyAir" parent="." unique_id=1416769464 instance=ExtResource("4_lbhrr")]
-position = Vector2(915, 168)
+position = Vector2(791, 137)

@@ -43,6 +43,17 @@ position = Vector2(0, -0.125)
 shape = SubResource("RectangleShape2D_2fjjf")
 debug_color = Color(0.8549998, 0, 0.9, 0.05490196)
 
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=2043474585]
+collision_layer = 0
+collision_mask = 144
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=693489436]
+rotation = -3.1415927
+scale = Vector2(7, 7)
+shape = SubResource("SegmentShape2D_ankee")
+debug_color = Color(0.99, 0, 0, 0.2784314)
+
 [node name="MaxHoverHeight" type="RayCast2D" parent="." unique_id=1872960686]
 visible = false
 target_position = Vector2(0, 150)
@@ -54,20 +65,10 @@ target_position = Vector2(0, 65)
 [node name="Timers" type="Node2D" parent="." unique_id=1039279153]
 
 [node name="ActionTimer" type="Timer" parent="Timers" unique_id=2051585098]
-one_shot = true
 autostart = true
 
 [node name="AttackTimer" type="Timer" parent="Timers" unique_id=1625573927]
 one_shot = true
-
-[node name="AttackHitbox" type="Area2D" parent="." unique_id=2043474585]
-collision_layer = 0
-collision_mask = 144
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=693489436]
-rotation = -3.1415927
-scale = Vector2(7, 7)
-shape = SubResource("SegmentShape2D_ankee")
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
