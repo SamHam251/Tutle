@@ -9,8 +9,9 @@ var target = null
 var hover_target = 0  # target.position.x - HOVER_RANGE / 2
 var target_in_dash_range = false
 
-# indicator
+# indicator and hitboxes
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var dash_hitbox: Area2D = $HitboxDash
 
 # timers
 @onready var action_timer = $Timers/ActionTimer
@@ -21,14 +22,17 @@ const ACTION_COOLDOWN_MAX = 3.0  # time in seconds
 # dash-specific variables
 const DASH_SPEED = 1300.0
 const DASH_WINDUP = 0.4  # time in seconds between a dash being indicated and a dash happening
-const JUMP_VELOCITY = -250.0
+const JUMP_VELOCITY = -200.0
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	else:
+		dash_hitbox.monitoring = false
 	
 	if target != null:
+		# AI when there is a target
 		move_to_target()
 	else:
 		pass  # AI when no target in range (do we even need to do this?)
@@ -37,11 +41,10 @@ func _physics_process(delta: float) -> void:
 
 func move_to_target() -> void:
 	# more accurately, the enemy will hover around the target to keep it just barely in the DashRange collider.
-	if target == null: return  # shouldn't happen but doesn't hurt to be safe. this stops the function if there is no enemy
+	if target == null: return  # shouldn't happen but doesn't hurt to be safe. this stops the function if there is no target
 	
 	# sign(position.x - target.position.x) is positive if the player is on the right, and negative if the player is on the left.
-	hover_target = target.position.x + (HOVER_RANGE * 0.8 * sign(position.x - target.position.x))
-	print(target.position.x)
+	hover_target = target.position.x + (HOVER_RANGE * 0.6 * sign(position.x - target.position.x))
 	
 	if hover_target > position.x:  # hover around the left side
 		velocity.x = move_toward(velocity.x, SPEED, ACCELERATION)
@@ -78,9 +81,13 @@ func _on_dash_timer_timeout() -> void:  # timer starts when a dash is queued. th
 	
 	if target.position.x - self.position.x > 0:
 		velocity.x = DASH_SPEED
+		dash_hitbox.scale.x = 1
 	else:
 		velocity.x = -DASH_SPEED
+		dash_hitbox.scale.x = -1
 	velocity.y = JUMP_VELOCITY
+	
+	dash_hitbox.monitoring = true
 	
 	action_timer.start(randf_range(ACTION_COOLDOWN_MIN, ACTION_COOLDOWN_MAX))
 

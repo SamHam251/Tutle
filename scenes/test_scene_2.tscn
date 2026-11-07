@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b5myhbv8ntedf" path="res://scenes/enemy_ground.tscn" id="1_r8opr"]
 [ext_resource type="PackedScene" uid="uid://cygu13je36f3i" path="res://scenes/enemy_air.tscn" id="2_4ol47"]
-[ext_resource type="PackedScene" uid="uid://oy67rn0cumj3" path="res://player.tscn" id="3_4ol47"]
+[ext_resource type="PackedScene" uid="uid://oy67rn0cumj3" path="res://scenes/player.tscn" id="3_4ol47"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i7v18"]
 

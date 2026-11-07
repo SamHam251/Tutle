@@ -1,24 +1,52 @@
 [gd_scene format=3 uid="uid://dsv1yaispraxf"]
 
 [ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://oy67rn0cumj3" path="res://player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://oy67rn0cumj3" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://b5myhbv8ntedf" path="res://scenes/enemy_ground.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cygu13je36f3i" path="res://scenes/enemy_air.tscn" id="4_lbhrr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
 size = Vector2(1650, 152)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
+size = Vector2(20, 116)
+
 [node name="Game" type="Node2D" unique_id=1783197433]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=708615000]
+[node name="Floor" type="StaticBody2D" parent="." unique_id=708615000]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=344124560]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=344124560]
 position = Vector2(572, 595)
 shape = SubResource("RectangleShape2D_cvvuu")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D" unique_id=145422301]
+[node name="Sprite2D" type="Sprite2D" parent="Floor/CollisionShape2D" unique_id=145422301]
 position = Vector2(-1.2636185e-05, -1.50203705e-05)
 scale = Vector2(12.890625, 1.1875)
 texture = ExtResource("1_uwrxv")
 
 [node name="Player" parent="." unique_id=592343652 instance=ExtResource("2_yqjtg")]
-position = Vector2(272, 441)
+position = Vector2(506, 171)
 scale = Vector2(2, 2)
+
+[node name="EnemyGround" parent="." unique_id=593195625 instance=ExtResource("3_lnu2h")]
+position = Vector2(1107, 471)
+
+[node name="gay jail delete later" type="Node2D" parent="." unique_id=1473623612]
+position = Vector2(-58, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="gay jail delete later" unique_id=500838062]
+position = Vector2(1105, 511)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gay jail delete later/StaticBody2D" unique_id=1858626152]
+position = Vector2(0, -48)
+shape = SubResource("RectangleShape2D_2fjjf")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="gay jail delete later" unique_id=682652234]
+position = Vector2(1210, 511)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gay jail delete later/StaticBody2D2" unique_id=919333806]
+position = Vector2(0, -48)
+shape = SubResource("RectangleShape2D_2fjjf")
+
+[node name="EnemyAir" parent="." unique_id=1416769464 instance=ExtResource("4_lbhrr")]
+position = Vector2(915, 168)
