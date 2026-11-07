@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bodmhbgf8bybh"]
+
+[ext_resource type="PackedScene" uid="uid://b5myhbv8ntedf" path="res://scenes/enemy.tscn" id="1_j8ivh"]
+[ext_resource type="PackedScene" uid="uid://c7st1jkhe1230" path="res://scenes/target_dummy.tscn" id="2_nd71p"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cvvuu"]
+
+[node name="TestScene" type="Node2D" unique_id=237825052]
+
+[node name="Enemy" parent="." unique_id=593195625 groups=["hostile"] instance=ExtResource("1_j8ivh")]
+position = Vector2(397, 129)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1354835978]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=188305217]
+position = Vector2(540, 458)
+shape = SubResource("WorldBoundaryShape2D_cvvuu")
+
+[node name="TargetDummy" parent="." unique_id=1033528923 groups=["friendly"] instance=ExtResource("2_nd71p")]
+position = Vector2(674, 414)
