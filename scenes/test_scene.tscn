@@ -1,14 +1,12 @@
 [gd_scene format=3 uid="uid://bodmhbgf8bybh"]
 
-[ext_resource type="PackedScene" uid="uid://b5myhbv8ntedf" path="res://scenes/enemy.tscn" id="1_j8ivh"]
+[ext_resource type="PackedScene" uid="uid://b5myhbv8ntedf" path="res://scenes/enemy_ground.tscn" id="1_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://c7st1jkhe1230" path="res://scenes/target_dummy.tscn" id="2_nd71p"]
+[ext_resource type="PackedScene" uid="uid://cygu13je36f3i" path="res://scenes/enemy_air.tscn" id="3_nd71p"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cvvuu"]
 
 [node name="TestScene" type="Node2D" unique_id=237825052]
-
-[node name="Enemy" parent="." unique_id=593195625 instance=ExtResource("1_j8ivh")]
-position = Vector2(454, 282)
 
 [node name="TestFloor" type="StaticBody2D" parent="." unique_id=1354835978]
 
@@ -16,5 +14,11 @@ position = Vector2(454, 282)
 position = Vector2(540, 458)
 shape = SubResource("WorldBoundaryShape2D_cvvuu")
 
-[node name="TargetDummy" parent="." unique_id=1033528923 groups=["friendly"] instance=ExtResource("2_nd71p")]
-position = Vector2(674, 414)
+[node name="EnemyGround" parent="." unique_id=593195625 instance=ExtResource("1_j8ivh")]
+position = Vector2(325, 281)
+
+[node name="EnemyAir" parent="." unique_id=1416769464 instance=ExtResource("3_nd71p")]
+position = Vector2(870, 252)
+
+[node name="TargetDummy" parent="." unique_id=1033528923 instance=ExtResource("2_nd71p")]
+position = Vector2(602, 382)

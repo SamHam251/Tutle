@@ -5,8 +5,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
 size = Vector2(16, 73)
 
-[node name="TargetDummy" type="CharacterBody2D" unique_id=1033528923]
-collision_layer = 2
+[node name="TargetDummy" type="CharacterBody2D" unique_id=1033528923 groups=["friendly"]]
+collision_layer = 16
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1162025506]
 scale = Vector2(0.23437497, 0.68750006)
