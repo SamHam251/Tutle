@@ -41,6 +41,7 @@ func move_to_target() -> void:
 	
 	# sign(position.x - target.position.x) is positive if the player is on the right, and negative if the player is on the left.
 	hover_target = target.position.x + (HOVER_RANGE * 0.8 * sign(position.x - target.position.x))
+	print(target.position.x)
 	
 	if hover_target > position.x:  # hover around the left side
 		velocity.x = move_toward(velocity.x, SPEED, ACCELERATION)
@@ -84,10 +85,10 @@ func _on_dash_timer_timeout() -> void:  # timer starts when a dash is queued. th
 	action_timer.start(randf_range(ACTION_COOLDOWN_MIN, ACTION_COOLDOWN_MAX))
 
 func _on_detection_range_body_entered(body: Node2D) -> void:
-	# print("thing")
+	print([body.is_in_group("friendly"), target])
 	if body.is_in_group("friendly") and target == null:
 		target = body
-		print(target)
+		print("targeted")
 
 func _on_dash_range_body_entered(body: Node2D) -> void:
 	if body == target:

@@ -3,7 +3,7 @@ class_name Player
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-@onready var ParryTimer = $"../ParryTimer"
+@onready var ParryTimer = $"ParryTimer"
 @onready var original_color = $Sprite2D.modulate
 var up_or_down = 0
 var slashable = true
@@ -39,12 +39,12 @@ func _physics_process(delta: float) -> void:
 		Global.parry = true
 		$Sprite2D.modulate = Color(original_color.r * 10, original_color.g * 10, original_color.b * 10, original_color.a)
 		ParryTimer.start()
-		
 
 func _on_parry_timer_timeout() -> void:
 	$Sprite2D.modulate = original_color
 	Global.parry = false
 	Global.parried = false
+	print("hey")
 
 
 func _on_slash_timer_timeout() -> void:
@@ -61,4 +61,4 @@ func _on_left_slash_body_entered(body: Node2D) -> void:
 func update_facing_direction():
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	#if direction 
-	print(direction)
+	#print(direction)

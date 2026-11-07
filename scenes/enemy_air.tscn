@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cygu13je36f3i"]
+
+[ext_resource type="Script" uid="uid://675xqyunanjm" path="res://scripts/enemy_air.gd" id="1_1wx6a"]
+[ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_a7ewt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
+size = Vector2(34, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7ewt"]
+radius = 162.51923
+
+[node name="EnemyAir" type="CharacterBody2D" unique_id=1416769464]
+scale = Vector2(2, 2)
+collision_layer = 5
+script = ExtResource("1_1wx6a")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1886328244]
+scale = Vector2(0.37500003, 0.1875)
+texture = ExtResource("1_a7ewt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1378516277]
+shape = SubResource("RectangleShape2D_cvvuu")
+
+[node name="DetectionRange" type="Area2D" parent="." unique_id=1769662769]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" unique_id=474396612]
+shape = SubResource("CircleShape2D_a7ewt")
+debug_color = Color(0.7, 0.7, 0.7, 0.13725491)
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1872960686]
+target_position = Vector2(0, 100)
