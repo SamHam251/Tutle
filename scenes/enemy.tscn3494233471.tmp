@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b5myhbv8ntedf"]
+
+[ext_resource type="Script" uid="uid://nparxq5lq60g" path="res://scripts/enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_7k104"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
+size = Vector2(8, 25.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ia1lp"]
+radius = 162.51923
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ankee"]
+size = Vector2(143, 26)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=593195625]
+scale = Vector2(2, 2)
+collision_layer = 4
+script = ExtResource("1_4gyqm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1183939404]
+scale = Vector2(0.140625, 0.3125)
+texture = ExtResource("1_7k104")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=115647677]
+position = Vector2(0, 6.25)
+shape = SubResource("RectangleShape2D_2fjjf")
+
+[node name="DetectionRange" type="Area2D" parent="." unique_id=156871943]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" unique_id=684884795]
+shape = SubResource("CircleShape2D_ia1lp")
+debug_color = Color(0.7, 0.7, 0.7, 0.13725491)
+
+[node name="DashRange" type="Area2D" parent="." unique_id=1685161382]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashRange" unique_id=1530890148]
+shape = SubResource("RectangleShape2D_ankee")
+debug_color = Color(0.57416666, 0.65, 0, 0.41960785)
+
+[connection signal="body_entered" from="DetectionRange" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
+[connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
+[connection signal="body_entered" from="DashRange" to="." method="_on_dash_range_body_entered"]
+[connection signal="body_exited" from="DashRange" to="." method="_on_dash_range_body_exited"]
