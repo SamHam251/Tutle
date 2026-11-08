@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://jpgfqu14alk0" path="res://assets/sounds/slash-2.mp3" id="9_ur7pv"]
 [ext_resource type="AudioStream" uid="uid://0ffms7g5axxk" path="res://assets/sounds/slash-3.mp3" id="10_y4r1p"]
 [ext_resource type="AudioStream" uid="uid://br47wlcxyv7lf" path="res://assets/sounds/slash-4.mp3" id="11_d2wvv"]
+[ext_resource type="AudioStream" uid="uid://ca7j7k21ch1j2" path="res://assets/sounds/parry.mp3" id="12_3v2ag"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
 atlas = ExtResource("3_fjrip")
@@ -320,6 +321,9 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
+[node name="ParryCDTimer" type="Timer" parent="." unique_id=31448954]
+one_shot = true
+
 [node name="slash-miss" type="AudioStreamPlayer2D" parent="." unique_id=1988649415]
 stream = ExtResource("8_smehm")
 
@@ -331,6 +335,9 @@ stream = ExtResource("10_y4r1p")
 
 [node name="slash-slam" type="AudioStreamPlayer2D" parent="." unique_id=1646381892]
 stream = ExtResource("11_d2wvv")
+
+[node name="parry" type="AudioStreamPlayer2D" parent="." unique_id=1732823905]
+stream = ExtResource("12_3v2ag")
 
 [connection signal="area_entered" from="RightSlash" to="." method="right_slash"]
 [connection signal="area_entered" from="UpSlash" to="." method="up_slash"]

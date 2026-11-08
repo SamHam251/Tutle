@@ -20,11 +20,13 @@ var is_attacking = false
 @onready var Slash_Miss_SFX = $"slash-miss"
 @onready var Slash_SFX = [$"slash-hit-1"]
 @onready var Slam_SFX = $"slash-slam"
+@onready var Parry_SFX = $"parry"
 
 # Knockback constants and also iframes i guess
 const KNOCKBACK = Vector2(-200, -150)  # sets your velocity to this when you take damage. sign of x-value depends on the hit direction.
 const STUN_TIME = 0.3  # time spent being kb'd after taking damage
 @onready var KnockbackTimer = $KnockbackTimer  # when active, disables player controls
+@onready var ParryCDTimer = $ParryCDTimer
 
 # Down slam attack
 var downslam: bool = false
@@ -88,8 +90,10 @@ func _physics_process(delta: float) -> void:
 			$Pogo.monitoring = true
 			if not is_on_floor():
 				start_downslam()
+				Slam_SFX.play()
+			else:
+				Slash_Miss_SFX.play()
 			$SlashTimer.start()
-			Slam_SFX.play()
 			await sprite.animation_finished
 			is_attacking = false
 			
@@ -132,12 +136,14 @@ func _physics_process(delta: float) -> void:
 			await sprite.animation_finished
 			is_attacking = false
 	#parry
-	if Input.is_action_just_pressed("Parry"):
+	if Input.is_action_just_pressed("Parry") and ParryCDTimer.is_stopped():
 		Global.parry = true
+		Parry_SFX.play()
 		sprite.modulate = Color(original_color.r * 10, original_color.g * 10, original_color.b * 10, original_color.a)
 		set_collision_layer_value(8, true)
 		Hurtbox.set_collision_layer_value(8, true)
 		ParryTimer.start()
+		ParryCDTimer.start()
 		reset_slash()
 
 func start_downslam() -> void:
@@ -223,8 +229,9 @@ func hit_by_enemy(area: Area2D) -> void:  # calls when the player's hurtbox coll
 	if enemy == null: return  # this should never happen
 	
 	if Global.parry:
-		# print("Parried an attack")
 		Global.landed_parry()
+		ParryCDTimer.stop()
+		# print("Parried an attack")
 		return
 	
 	Global.took_damage()

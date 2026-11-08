@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y = move_toward(velocity.y, 0, ACCELERATION.y * 0.5)
 		
 		attack_hitbox.rotate(ROTATION_SPEED * delta * rotation_direction)
-		if attack_hitbox.rotation_degrees > 360 or attack_hitbox.rotation_degrees < -360:
+		if attack_hitbox.rotation_degrees > 130 or attack_hitbox.rotation_degrees < -130:
 			attacking = false
 			action_timer.start(randf_range(ACTION_COOLDOWN_MIN, ACTION_COOLDOWN_MAX))
 			attack_hitbox.monitorable = false
