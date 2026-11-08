@@ -30,9 +30,9 @@ const ACTION_COOLDOWN_MAX = 3.0  # time in seconds
 
 func _physics_process(delta: float) -> void:
 	
-	if not attack_timer.is_stopped():
-		velocity.x = move_toward(velocity.x, 0, ACCELERATION.x * 1.5)
-		velocity.y = move_toward(velocity.y, 0, ACCELERATION.y * 1.5)
+	#if not attack_timer.is_stopped():
+		#velocity.x = move_toward(velocity.x, 0, ACCELERATION.x * 1.5)
+		#velocity.y = move_toward(velocity.y, 0, ACCELERATION.y * 1.5)
 	
 	if attacking:
 		velocity.x = move_toward(velocity.x, 0, ACCELERATION.x * 0.5)
@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 		if attack_collision.rotation_degrees > 180.0 or attack_collision.rotation_degrees < -540.0:
 			attacking = false
 			action_timer.start(randf_range(ACTION_COOLDOWN_MIN, ACTION_COOLDOWN_MAX))
-			attack_hitbox.monitoring = false
+			attack_hitbox.monitorable = false
 			attack_collision.rotation_degrees = -180
 	else:
 		hover_towards_target()
@@ -55,6 +55,7 @@ func action() -> void:  # calls when ActionTimer reaches 0.
 	
 	# start spin attack
 	sprite.modulate = Color(3, 3, 3, 1)
+	attack_hitbox.monitorable = true
 	attack_timer.start(ATTACK_WINDUP)
 
 func start_attack() -> void:  # calls when AttackTimer reaches 0.
