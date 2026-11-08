@@ -12,17 +12,6 @@ size = Vector2(1650, 152)
 [node name="Game" type="Node2D" unique_id=1783197433]
 script = ExtResource("1_iywne")
 
-[node name="Floor" type="StaticBody2D" parent="." unique_id=708615000]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=344124560]
-position = Vector2(572, 595)
-shape = SubResource("RectangleShape2D_cvvuu")
-
-[node name="Sprite2D" type="Sprite2D" parent="Floor/CollisionShape2D" unique_id=145422301]
-position = Vector2(-1.2636185e-05, -1.50203705e-05)
-scale = Vector2(12.890625, 1.1875)
-texture = ExtResource("1_uwrxv")
-
 [node name="Player" parent="." unique_id=592343652 instance=ExtResource("2_yqjtg")]
 position = Vector2(389, 379)
 scale = Vector2(2, 2)
@@ -39,5 +28,16 @@ rotation = 1.5707964
 [node name="Wall3" parent="Walls" unique_id=1389857305 instance=ExtResource("5_p57ef")]
 position = Vector2(1160, -53)
 rotation = 1.5707964
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=708615000]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=344124560]
+position = Vector2(572, 595)
+shape = SubResource("RectangleShape2D_cvvuu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor/CollisionShape2D" unique_id=145422301]
+position = Vector2(-1.2636185e-05, -1.50203705e-05)
+scale = Vector2(12.890625, 1.1875)
+texture = ExtResource("1_uwrxv")
 
 [node name="UI" parent="." unique_id=835666112 instance=ExtResource("1_lbhrr")]

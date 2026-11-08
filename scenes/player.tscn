@@ -8,25 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dkia36bj2eqds" path="res://assets/sprites/PlayerSprites/slashing animation.png" id="6_y4r1p"]
 [ext_resource type="Texture2D" uid="uid://xldws1u2snf3" path="res://assets/sprites/PlayerSprites/spinning animation.png" id="7_d2wvv"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
-radius = 8.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(93, 19)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_cvvuu"]
-radius = 25.019993
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
-size = Vector2(76, 69)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(112, 139)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvvuu"]
-radius = 5.0
-height = 22.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
 atlas = ExtResource("3_fjrip")
 region = Rect2(0, 0, 36, 36)
@@ -202,11 +183,40 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(71.75, 19)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cvvuu"]
+radius = 25.019993
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
+size = Vector2(76, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(110, 54)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvvuu"]
+radius = 4.0
+height = 14.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1298181546 groups=["friendly", "player"]]
 collision_layer = 16
 script = ExtResource("1_onrkg")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=857724279]
+texture_filter = 1
+position = Vector2(1.1920929e-07, -7)
+scale = Vector2(2.097222, 2.097222)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"downslash"
+
 [node name="CollisionHitbox" type="CollisionShape2D" parent="." unique_id=187735370]
+visible = false
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_g4v7s")
 
 [node name="RightSlash" type="Area2D" parent="." unique_id=848582825]
@@ -215,7 +225,7 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightSlash" unique_id=101777484]
 visible = false
-position = Vector2(46, 0)
+position = Vector2(35, 0)
 shape = SubResource("RectangleShape2D_g2els")
 debug_color = Color(0, 0.09411765, 0.7019608, 0.15686275)
 
@@ -253,7 +263,7 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pogo" unique_id=450202284]
 visible = false
-position = Vector2(0, 37.5)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_dqkch")
 debug_color = Color(0.7, 0, 0.53666645, 0.18039216)
 
@@ -269,7 +279,7 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSlash" unique_id=2028553016]
 visible = false
-position = Vector2(-46, 0)
+position = Vector2(-36.125, 0)
 shape = SubResource("RectangleShape2D_g2els")
 debug_color = Color(0, 0.7019608, 0.39607844, 0.27450982)
 
@@ -290,6 +300,8 @@ collision_layer = 16
 collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1910042406]
+visible = false
+position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_cvvuu")
 debug_color = Color(0.99, 0, 0, 0.41960785)
 
@@ -303,13 +315,6 @@ one_shot = true
 [node name="SlashTimer" type="Timer" parent="." unique_id=525837217]
 wait_time = 0.3
 one_shot = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=857724279]
-texture_filter = 1
-position = Vector2(1.1920929e-07, -7)
-scale = Vector2(2.097222, 2.097222)
-sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"idle"
 
 [connection signal="area_entered" from="RightSlash" to="." method="right_slash"]
 [connection signal="area_entered" from="UpSlash" to="." method="up_slash"]
