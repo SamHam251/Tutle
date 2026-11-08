@@ -1,69 +1,82 @@
 [gd_scene format=3 uid="uid://oy67rn0cumj3"]
 
 [ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_4flbx"]
-[ext_resource type="Script" uid="uid://cl6krmkonue5d" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://cl6krmkonue5d" path="res://character_body_2d.gd" id="1_onrkg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
-radius = 8.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvvuu"]
-radius = 6.0
-height = 24.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(19, 29)
 
-[node name="Player" type="CharacterBody2D" unique_id=592343652 groups=["friendly"]]
+[node name="Player" type="Node2D" unique_id=1982827751]
+
+[node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1280693685]
 collision_layer = 16
 script = ExtResource("1_onrkg")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=261331796]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody" unique_id=187735370]
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerBody" unique_id=261331796]
+position = Vector2(-0.4999981, -1)
 scale = Vector2(0.14843751, 0.24999999)
 texture = ExtResource("1_4flbx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=187735370]
-visible = false
-shape = SubResource("CapsuleShape2D_g4v7s")
-
-[node name="Hurtbox" type="Area2D" parent="." unique_id=562590422]
-collision_layer = 16
-collision_mask = 64
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1177549219]
-shape = SubResource("CapsuleShape2D_cvvuu")
-debug_color = Color(0.98, 0, 0, 0.4745098)
-
-[node name="RightSlash" type="Area2D" parent="." unique_id=848582825]
-visible = false
+[node name="RightSlash" type="Area2D" parent="PlayerBody" unique_id=848582825]
+collision_mask = 2
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSlash" unique_id=101777484]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/RightSlash" unique_id=101777484]
 position = Vector2(18.5, -1.5)
 shape = SubResource("RectangleShape2D_g4v7s")
 
-[node name="UpSlash" type="Area2D" parent="." unique_id=1044539735]
+[node name="RightSlashSprite" type="Sprite2D" parent="PlayerBody/RightSlash" unique_id=1746345610]
 visible = false
+position = Vector2(24, -1.5000002)
+scale = Vector2(0.0625, 0.2265625)
+texture = ExtResource("1_4flbx")
+
+[node name="UpSlash" type="Area2D" parent="PlayerBody" unique_id=1044539735 groups=["SlashHitbox"]]
+collision_mask = 2
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpSlash" unique_id=2042208991]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/UpSlash" unique_id=2042208991]
 position = Vector2(-1, -30)
 shape = SubResource("RectangleShape2D_g4v7s")
 
-[node name="Pogo" type="Area2D" parent="." unique_id=1905850997]
+[node name="Upslash Sprite" type="Sprite2D" parent="PlayerBody/UpSlash" unique_id=956384904]
 visible = false
+position = Vector2(-1, -40)
+scale = Vector2(0.14843753, 0.07812502)
+texture = ExtResource("1_4flbx")
+
+[node name="Pogo" type="Area2D" parent="PlayerBody" unique_id=1905850997 groups=["SlashHitbox"]]
+collision_mask = 2
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pogo" unique_id=794778084]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/Pogo" unique_id=450202284]
 position = Vector2(-1, 28)
 shape = SubResource("RectangleShape2D_g4v7s")
 
-[node name="LeftSlash" type="Area2D" parent="." unique_id=48371204]
+[node name="DownslashSprite" type="Sprite2D" parent="PlayerBody/Pogo" unique_id=449076642]
 visible = false
+position = Vector2(-0.5000012, 39.75)
+scale = Vector2(0.16406249, 0.06640624)
+texture = ExtResource("1_4flbx")
+
+[node name="LeftSlash" type="Area2D" parent="PlayerBody" unique_id=48371204 groups=["SlashHitbox"]]
+collision_mask = 2
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSlash" unique_id=2028553016]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBody/LeftSlash" unique_id=2028553016]
 position = Vector2(-19, -1)
 shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="LeftSlashSprite" type="Sprite2D" parent="PlayerBody/LeftSlash" unique_id=1276492225]
+visible = false
+position = Vector2(-24.125, -0.87499785)
+scale = Vector2(0.08007813, 0.23242189)
+texture = ExtResource("1_4flbx")
 
 [node name="ParryTimer" type="Timer" parent="." unique_id=839630041]
 wait_time = 0.5
@@ -73,8 +86,9 @@ one_shot = true
 wait_time = 0.2
 one_shot = true
 
-[node name="KnockbackTimer" type="Timer" parent="." unique_id=226822759]
-wait_time = 0.3
-one_shot = true
-
-[connection signal="area_entered" from="Hurtbox" to="." method="hit_by_enemy"]
+[connection signal="area_entered" from="PlayerBody/RightSlash" to="PlayerBody" method="_on_right_slash_area_entered"]
+[connection signal="area_entered" from="PlayerBody/UpSlash" to="PlayerBody" method="_on_up_slash_area_entered"]
+[connection signal="area_entered" from="PlayerBody/Pogo" to="PlayerBody" method="_on_pogo_area_entered"]
+[connection signal="area_entered" from="PlayerBody/LeftSlash" to="PlayerBody" method="_on_left_slash_area_entered"]
+[connection signal="timeout" from="ParryTimer" to="PlayerBody" method="_on_parry_timer_timeout"]
+[connection signal="timeout" from="SlashTimer" to="PlayerBody" method="_on_slash_timer_timeout"]

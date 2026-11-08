@@ -25,6 +25,7 @@ Global="*uid://ds45tmuhy7nk3"
 
 [global_group]
 
+SlashHitbox=""
 friendly=""
 
 [input]

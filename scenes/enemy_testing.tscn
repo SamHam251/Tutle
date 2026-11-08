@@ -9,17 +9,17 @@ size = Vector2(90, 89)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(42, 48)
 
-[node name="EnemyTesting" type="CharacterBody2D" unique_id=1303977691]
+[node name="EnemyTesting" type="CharacterBody2D" unique_id=1303977691 groups=["SlashHitbox"]]
 script = ExtResource("1_qyon3")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1341506084]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1341506084]
 position = Vector2(0, 0.5)
-collision_layer = 17
+collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=793722092]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=793722092]
 shape = SubResource("RectangleShape2D_yf5fn")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D" unique_id=576678312]
+[node name="Sprite2D" type="Sprite2D" parent="Hurtbox" unique_id=576678312]
 position = Vector2(-1.4999981, -0.9999981)
 scale = Vector2(0.3203125, 0.3828125)
 texture = ExtResource("1_ixrvs")
@@ -28,5 +28,5 @@ texture = ExtResource("1_ixrvs")
 position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_g4v7s")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_body_exited"]

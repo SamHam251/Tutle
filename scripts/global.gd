@@ -1,10 +1,8 @@
 extends Node
 
 var parry = false
-var total = 100
 var parried = false
 var player_health = 100
-var enemy_health = 30
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
