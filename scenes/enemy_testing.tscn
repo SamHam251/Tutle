@@ -3,30 +3,31 @@
 [ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_ixrvs"]
 [ext_resource type="Script" uid="uid://cwjxbur18wy6m" path="res://scripts/enemy_testing.gd" id="1_qyon3"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(38, 46)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
 size = Vector2(90, 89)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
-size = Vector2(42, 48)
 
 [node name="EnemyTesting" type="CharacterBody2D" unique_id=1303977691 groups=["SlashHitbox"]]
 script = ExtResource("1_qyon3")
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=1341506084]
-position = Vector2(0, 0.5)
-collision_layer = 5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=793722092]
-shape = SubResource("RectangleShape2D_yf5fn")
-
-[node name="Sprite2D" type="Sprite2D" parent="Hurtbox" unique_id=576678312]
-position = Vector2(-1.4999981, -0.9999981)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=576678312]
+position = Vector2(-2.3841858e-07, 2.9802322e-08)
 scale = Vector2(0.3203125, 0.3828125)
 texture = ExtResource("1_ixrvs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1985271359]
-position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1341506084]
+position = Vector2(0, 0.5)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=793722092]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+debug_color = Color(0.85, 0.34, 0.39099994, 0)
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_body_exited"]

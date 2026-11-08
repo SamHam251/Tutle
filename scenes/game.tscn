@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dsv1yaispraxf"]
 
+[ext_resource type="PackedScene" uid="uid://c5uepl5ppwyrn" path="res://scenes/ui.tscn" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://oy67rn0cumj3" path="res://scenes/player.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://c1kkxundm2afe" path="res://scenes/enemy_testing.tscn" id="3_lnu2h"]
@@ -8,6 +9,8 @@
 size = Vector2(1650, 152)
 
 [node name="Game" type="Node2D" unique_id=1783197433]
+
+[node name="UI" parent="." unique_id=835666112 instance=ExtResource("1_lbhrr")]
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=708615000]
 

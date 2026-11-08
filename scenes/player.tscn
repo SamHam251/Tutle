@@ -7,16 +7,16 @@
 radius = 8.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(74, 49.5)
+size = Vector2(112, 19)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
-size = Vector2(44, 29)
+[sub_resource type="CircleShape2D" id="CircleShape2D_cvvuu"]
+radius = 25.019993
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
+size = Vector2(76, 69)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(44, 29)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
-size = Vector2(74, 49.5)
+size = Vector2(54, 64)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvvuu"]
 radius = 5.0
@@ -38,8 +38,14 @@ collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightSlash" unique_id=101777484]
-position = Vector2(43, -10.25)
+position = Vector2(56, 0)
 shape = SubResource("RectangleShape2D_g2els")
+debug_color = Color(0, 0.09411765, 0.7019608, 0.15686275)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RightSlash" unique_id=354925718]
+position = Vector2(24, 0)
+shape = SubResource("CircleShape2D_cvvuu")
+debug_color = Color(0, 0.09411765, 0.7019608, 0.15686275)
 
 [node name="RightSlashSprite" type="Sprite2D" parent="RightSlash" unique_id=1746345610]
 visible = false
@@ -51,23 +57,25 @@ texture = ExtResource("1_4flbx")
 collision_mask = 4
 monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="UpSlash" unique_id=2042208991]
-position = Vector2(0, -29)
-shape = SubResource("RectangleShape2D_qhqgy")
-
 [node name="UpSlashSprite" type="Sprite2D" parent="UpSlash" unique_id=956384904]
 visible = false
 position = Vector2(-1, -40)
 scale = Vector2(0.14843753, 0.07812502)
 texture = ExtResource("1_4flbx")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpSlash" unique_id=794808410]
+position = Vector2(0, -24.5)
+shape = SubResource("RectangleShape2D_2fjjf")
+debug_color = Color(0.28000006, 0, 0.7, 0.18039216)
+
 [node name="Pogo" type="Area2D" parent="." unique_id=1905850997 groups=["SlashHitbox"]]
 collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pogo" unique_id=450202284]
-position = Vector2(0, 28)
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_dqkch")
+debug_color = Color(0.7, 0, 0.53666645, 0.18039216)
 
 [node name="DownslashSprite" type="Sprite2D" parent="Pogo" unique_id=449076642]
 visible = false
@@ -80,8 +88,14 @@ collision_mask = 4
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSlash" unique_id=2028553016]
-position = Vector2(-43, -10.25)
-shape = SubResource("RectangleShape2D_g4v7s")
+position = Vector2(-56, 0)
+shape = SubResource("RectangleShape2D_g2els")
+debug_color = Color(0, 0.7019608, 0.39607844, 0.27450982)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LeftSlash" unique_id=1147528392]
+position = Vector2(-25, 0)
+shape = SubResource("CircleShape2D_cvvuu")
+debug_color = Color(0, 0.7019608, 0.39607844, 0.27450982)
 
 [node name="LeftSlashSprite" type="Sprite2D" parent="LeftSlash" unique_id=1276492225]
 visible = false

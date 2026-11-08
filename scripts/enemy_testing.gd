@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 var in_range = false
-@export var health = 100
+@export var health = 1000
 var knockback_vel = Vector2.ZERO
 var move = 15
 
@@ -18,10 +18,12 @@ func _process(delta: float) -> void:
 			
 #this is for the walking, jumping, gravity, and the knockback
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	
 	knockback_vel = knockback_vel.move_toward(Vector2.ZERO, 800.0*delta)
 	velocity = knockback_vel
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	move_and_slide()
 
 #this just determines if your in range to parry the monster

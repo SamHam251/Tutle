@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://c5uepl5ppwyrn"]
 
 [ext_resource type="Texture2D" uid="uid://yh5esb1g2tqy" path="res://assets/sprites/ui_bg.png" id="1_nt7q6"]
-[ext_resource type="FontFile" uid="uid://c15qhfd8lcug1" path="res://assets/PixelPurl.ttf" id="2_x4jx1"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_cvvuu"]
-font = ExtResource("2_x4jx1")
-font_size = 48
+[ext_resource type="LabelSettings" uid="uid://dismhax8glg1o" path="res://assets/ui_label_settings.tres" id="2_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://0g2i1c44smtt" path="res://assets/sprites/healthbar/Bar/empty health bar.png" id="3_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://qyno4lqa6dde" path="res://assets/sprites/healthbar/Health/health.png" id="4_wm3ai"]
 
 [node name="UI" type="Control" unique_id=835666112]
 layout_mode = 3
@@ -19,19 +17,43 @@ grow_vertical = 2
 layout_mode = 0
 offset_left = 13.0
 offset_top = 13.0
-offset_right = 449.0
-offset_bottom = 68.0
+offset_right = 416.0
+offset_bottom = 125.0
 texture = ExtResource("1_nt7q6")
 patch_margin_left = 5
 patch_margin_top = 5
 patch_margin_right = 5
 patch_margin_bottom = 5
 
-[node name="Label" type="Label" parent="." unique_id=1105899025]
+[node name="LifeLabel" type="Label" parent="NinePatchRect" unique_id=1105899025]
 layout_mode = 0
-offset_left = 26.0
-offset_top = 22.0
-offset_right = 89.0
-offset_bottom = 63.0
+offset_left = 13.0
+offset_top = 9.0
+offset_right = 76.0
+offset_bottom = 50.0
 text = "LIFE"
-label_settings = SubResource("LabelSettings_cvvuu")
+label_settings = ExtResource("2_gdt2y")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="NinePatchRect" unique_id=1928356367]
+layout_mode = 0
+offset_left = 87.99999
+offset_top = 9.0
+offset_right = 216.0
+offset_bottom = 25.0
+scale = Vector2(2.36, 2.36)
+alignment_horizontal = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="NinePatchRect/AspectRatioContainer" unique_id=1075859814]
+layout_mode = 2
+value = 75.0
+texture_under = ExtResource("3_gdt2y")
+texture_progress = ExtResource("4_wm3ai")
+
+[node name="Label" type="Label" parent="NinePatchRect" unique_id=1284238131]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 58.0
+offset_right = 115.0
+offset_bottom = 99.0
+text = "Score: 00000 Kills: 000"
+label_settings = ExtResource("2_gdt2y")
