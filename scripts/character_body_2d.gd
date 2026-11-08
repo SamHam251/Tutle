@@ -17,6 +17,9 @@ var is_attacking = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 @onready var Hurtbox = $Hurtbox
+@onready var Slash_Miss_SFX = $"slash-miss"
+@onready var Slash_SFX = [$"slash-hit-1"]
+@onready var Slam_SFX = $"slash-slam"
 
 # Knockback constants and also iframes i guess
 const KNOCKBACK = Vector2(-200, -150)  # sets your velocity to this when you take damage. sign of x-value depends on the hit direction.
@@ -86,8 +89,10 @@ func _physics_process(delta: float) -> void:
 			if not is_on_floor():
 				start_downslam()
 			$SlashTimer.start()
+			Slam_SFX.play()
 			await sprite.animation_finished
 			is_attacking = false
+			
 		# elif facing.y > 0:
 				# print("Slashed left")
 			'''sprite.flip_h = true
@@ -103,6 +108,7 @@ func _physics_process(delta: float) -> void:
 			slashable = false
 			$UpSlash.monitoring = true
 			$SlashTimer.start()
+			Slash_Miss_SFX.play()
 			await sprite.animation_finished
 			is_attacking = false
 		elif facing.x > 0:
@@ -112,6 +118,7 @@ func _physics_process(delta: float) -> void:
 			slashable = false
 			$RightSlash.monitoring = true
 			$SlashTimer.start()
+			Slash_Miss_SFX.play()
 			await sprite.animation_finished
 			is_attacking = false
 		elif facing.x < 0:
@@ -121,6 +128,7 @@ func _physics_process(delta: float) -> void:
 			slashable = false
 			$LeftSlash.monitoring = true
 			$SlashTimer.start()
+			Slash_Miss_SFX.play()
 			await sprite.animation_finished
 			is_attacking = false
 	#parry
@@ -181,6 +189,7 @@ func right_slash(area: Area2D) -> void:
 func slash_attack(enemy, direction: Vector2):
 	if enemy is Enemy:
 		Global.landed_attack(not (enemy.is_on_floor() and self.is_on_floor()))
+		Slash_SFX.pick_random().play()
 		
 		# knockback modifiers (both)
 		if direction.y == 0 and not (enemy.is_on_floor() or self.is_on_floor()):
