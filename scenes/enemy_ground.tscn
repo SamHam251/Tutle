@@ -2,14 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_7k104"]
 [ext_resource type="Script" uid="uid://nparxq5lq60g" path="res://scripts/enemy_ground.gd" id="1_s4x8n"]
-[ext_resource type="Texture2D" uid="uid://b6kk6b6o06h0v" path="res://assets/sprites/enemy_healthbar_bg.png" id="3_xi17v"]
-[ext_resource type="Texture2D" uid="uid://bq4b0xituslvc" path="res://assets/sprites/enemy_healthbar_progress.png" id="4_sekqj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
 size = Vector2(8, 25.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ia1lp"]
-radius = 162.51923
+radius = 240.5187
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ankee"]
 size = Vector2(264, 66)
@@ -17,9 +15,12 @@ size = Vector2(264, 66)
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvvuu"]
 radius = 14.5
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
+size = Vector2(16, 38)
+
 [node name="EnemyGround" type="CharacterBody2D" unique_id=593195625]
 scale = Vector2(2, 2)
-collision_layer = 4
+collision_layer = 0
 collision_mask = 129
 script = ExtResource("1_s4x8n")
 
@@ -28,7 +29,6 @@ scale = Vector2(0.140625, 0.3125)
 texture = ExtResource("1_7k104")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=115647677]
-visible = false
 position = Vector2(0, 6.25)
 shape = SubResource("RectangleShape2D_2fjjf")
 
@@ -45,7 +45,7 @@ collision_mask = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DashRange" unique_id=1530890148]
 position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_ankee")
-debug_color = Color(0.57416666, 0.65, 0, 0.41960785)
+debug_color = Color(0.57254905, 0.6509804, 0, 0)
 
 [node name="HitboxDash" type="Area2D" parent="." unique_id=1592284625]
 collision_layer = 64
@@ -57,6 +57,14 @@ monitorable = false
 position = Vector2(9, 4)
 shape = SubResource("CircleShape2D_cvvuu")
 debug_color = Color(0.99999994, 0.011616092, 0.053396374, 0.41960785)
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=18133127]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=932917196]
+shape = SubResource("RectangleShape2D_cvvuu")
+debug_color = Color(0.7, 0.47833332, 0, 0.41960785)
 
 [node name="Timers" type="Node2D" parent="." unique_id=999962972]
 
@@ -72,14 +80,9 @@ one_shot = true
 [node name="DashEndTimer" type="Timer" parent="Timers" unique_id=94548026]
 one_shot = true
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=922437707]
-offset_left = -12.0
-offset_top = 21.5
-offset_right = 12.0
-offset_bottom = 25.5
-value = 100.0
-texture_under = ExtResource("3_xi17v")
-texture_progress = ExtResource("4_sekqj")
+[node name="StunTimer" type="Timer" parent="Timers" unique_id=481345131]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]

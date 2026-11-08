@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://c5uepl5ppwyrn"]
 
+[ext_resource type="Script" uid="uid://ct84rjc85od24" path="res://scenes/ui.gd" id="1_8dubc"]
 [ext_resource type="Texture2D" uid="uid://yh5esb1g2tqy" path="res://assets/sprites/ui_bg.png" id="1_nt7q6"]
 [ext_resource type="LabelSettings" uid="uid://dismhax8glg1o" path="res://assets/ui_label_settings.tres" id="2_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://0g2i1c44smtt" path="res://assets/sprites/healthbar/Bar/empty health bar.png" id="3_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://qyno4lqa6dde" path="res://assets/sprites/healthbar/Health/health.png" id="4_wm3ai"]
+[ext_resource type="Script" uid="uid://d3fart8rth51n" path="res://scenes/healthbar.gd" id="5_wm3ai"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
+size = Vector2(490, 196)
 
 [node name="UI" type="Control" unique_id=835666112]
 layout_mode = 3
@@ -12,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8dubc")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=394065835]
 layout_mode = 0
@@ -48,12 +54,34 @@ layout_mode = 2
 value = 75.0
 texture_under = ExtResource("3_gdt2y")
 texture_progress = ExtResource("4_wm3ai")
+script = ExtResource("5_wm3ai")
 
-[node name="Label" type="Label" parent="NinePatchRect" unique_id=1284238131]
+[node name="ScoreLabel" type="Label" parent="NinePatchRect" unique_id=1284238131]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 58.0
 offset_right = 115.0
 offset_bottom = 99.0
-text = "Score: 00000 Kills: 000"
+text = "Score: 00000"
 label_settings = ExtResource("2_gdt2y")
+
+[node name="KillsLabel" type="Label" parent="NinePatchRect" unique_id=63982832]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 58.0
+offset_right = 386.0
+offset_bottom = 99.0
+text = "Kills: 000"
+label_settings = ExtResource("2_gdt2y")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=6279275]
+collision_layer = 0
+collision_mask = 20
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1749589769]
+visible = false
+position = Vector2(235, 88)
+shape = SubResource("RectangleShape2D_cvvuu")
+
+[connection signal="area_entered" from="Area2D" to="." method="entity_too_close"]
+[connection signal="area_exited" from="Area2D" to="." method="reset_opacity"]

@@ -7,12 +7,15 @@
 size = Vector2(26, 12)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a7ewt"]
-radius = 162.51923
+radius = 248.0247
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
 size = Vector2(106, 77.25)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ankee"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jg2fy"]
+size = Vector2(34, 17)
 
 [node name="EnemyAir" type="CharacterBody2D" unique_id=1416769464]
 scale = Vector2(2, 2)
@@ -39,6 +42,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverRange" unique_id=879329161]
+visible = false
 position = Vector2(0, -0.125)
 shape = SubResource("RectangleShape2D_2fjjf")
 debug_color = Color(0.8549998, 0, 0.9, 0.05490196)
@@ -55,13 +59,25 @@ scale = Vector2(1, 7)
 shape = SubResource("SegmentShape2D_ankee")
 debug_color = Color(0.99, 0, 0, 0.2784314)
 
-[node name="MaxHoverHeight" type="RayCast2D" parent="." unique_id=1872960686]
+[node name="Sprite2D" type="Sprite2D" parent="AttackHitbox" unique_id=1089876580]
 visible = false
+position = Vector2(0, -35)
+scale = Vector2(0.023437496, 0.546875)
+texture = ExtResource("1_a7ewt")
+
+[node name="MaxHoverHeight" type="RayCast2D" parent="." unique_id=1872960686]
 target_position = Vector2(0, 150)
 
 [node name="MinHoverHeight" type="RayCast2D" parent="." unique_id=1918990650]
-visible = false
 target_position = Vector2(0, 65)
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1652179083]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=511631601]
+shape = SubResource("RectangleShape2D_jg2fy")
+debug_color = Color(0.7460405, 0.46292168, 0, 0.41960785)
 
 [node name="Timers" type="Node2D" parent="." unique_id=1039279153]
 
@@ -69,6 +85,10 @@ target_position = Vector2(0, 65)
 autostart = true
 
 [node name="AttackTimer" type="Timer" parent="Timers" unique_id=1625573927]
+one_shot = true
+
+[node name="StunTimer" type="Timer" parent="Timers" unique_id=277720346]
+wait_time = 0.2
 one_shot = true
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]

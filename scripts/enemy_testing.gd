@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 var in_range = false
-@export var health = 1000
+@export var health = 150 + Global.score / 20
 var knockback_vel = Vector2.ZERO
 var move = 15
 
@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	knockback_vel = knockback_vel.move_toward(Vector2.ZERO, 800.0*delta)
-	velocity = knockback_vel
+	# velocity = knockback_vel
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -38,7 +38,7 @@ func _on_hurtbox_body_exited(_body: Node2D) -> void:
 func take_damage(damage, knockback):
 	health -= damage
 	print(health)
-	knockback_vel = knockback
+	velocity += knockback
 	print("Knockback passed in: ", knockback)
 	if health <= 0:
 		queue_free()

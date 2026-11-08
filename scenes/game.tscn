@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://dsv1yaispraxf"]
 
+[ext_resource type="Script" uid="uid://ds45tmuhy7nk3" path="res://scripts/global.gd" id="1_iywne"]
 [ext_resource type="PackedScene" uid="uid://c5uepl5ppwyrn" path="res://scenes/ui.tscn" id="1_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://oy67rn0cumj3" path="res://scenes/player.tscn" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://c1kkxundm2afe" path="res://scenes/enemy_testing.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://dyijppicet52a" path="res://scenes/wall.tscn" id="5_p57ef"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
 size = Vector2(1650, 152)
 
 [node name="Game" type="Node2D" unique_id=1783197433]
-
-[node name="UI" parent="." unique_id=835666112 instance=ExtResource("1_lbhrr")]
+script = ExtResource("1_iywne")
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=708615000]
 
@@ -24,8 +24,20 @@ scale = Vector2(12.890625, 1.1875)
 texture = ExtResource("1_uwrxv")
 
 [node name="Player" parent="." unique_id=592343652 instance=ExtResource("2_yqjtg")]
-position = Vector2(372, 246)
+position = Vector2(389, 379)
 scale = Vector2(2, 2)
 
-[node name="EnemyTesting" parent="." unique_id=1303977691 instance=ExtResource("3_lnu2h")]
-position = Vector2(736, 469)
+[node name="Walls" type="Node2D" parent="." unique_id=45914900]
+
+[node name="Wall" parent="Walls" unique_id=2130129402 instance=ExtResource("5_p57ef")]
+position = Vector2(-40, -8)
+
+[node name="Wall2" parent="Walls" unique_id=1149302458 instance=ExtResource("5_p57ef")]
+position = Vector2(-2, -34)
+rotation = 1.5707964
+
+[node name="Wall3" parent="Walls" unique_id=1389857305 instance=ExtResource("5_p57ef")]
+position = Vector2(1160, -53)
+rotation = 1.5707964
+
+[node name="UI" parent="." unique_id=835666112 instance=ExtResource("1_lbhrr")]
