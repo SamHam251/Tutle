@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bxo1yrta55v24"]
+
+[ext_resource type="PackedScene" uid="uid://b5myhbv8ntedf" path="res://scenes/enemy_ground.tscn" id="1_r8opr"]
+[ext_resource type="PackedScene" uid="uid://cygu13je36f3i" path="res://scenes/enemy_air.tscn" id="2_4ol47"]
+[ext_resource type="PackedScene" uid="uid://oy67rn0cumj3" path="res://scenes/player.tscn" id="3_4ol47"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i7v18"]
+
+[node name="TestScene2" type="Node2D" unique_id=1304894160]
+
+[node name="TestFloor" type="StaticBody2D" parent="." unique_id=1775672019]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestFloor" unique_id=1596271423]
+position = Vector2(540, 458)
+shape = SubResource("WorldBoundaryShape2D_i7v18")
+
+[node name="EnemyGround" parent="." unique_id=593195625 instance=ExtResource("1_r8opr")]
+position = Vector2(325, 281)
+
+[node name="EnemyAir" parent="." unique_id=1416769464 instance=ExtResource("2_4ol47")]
+position = Vector2(870, 252)
+
+[node name="Player" parent="." unique_id=592343652 instance=ExtResource("3_4ol47")]
+position = Vector2(692, 389)
+scale = Vector2(2, 2)

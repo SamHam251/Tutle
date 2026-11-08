@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://oy67rn0cumj3"]
+
+[ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://cl6krmkonue5d" path="res://scripts/character_body_2d.gd" id="1_onrkg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
+radius = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvvuu"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(19, 29)
+
+[node name="Player" type="CharacterBody2D" unique_id=592343652 groups=["friendly"]]
+collision_layer = 16
+script = ExtResource("1_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=261331796]
+scale = Vector2(0.14843751, 0.24999999)
+texture = ExtResource("1_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=187735370]
+visible = false
+shape = SubResource("CapsuleShape2D_g4v7s")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=562590422]
+collision_layer = 16
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1177549219]
+shape = SubResource("CapsuleShape2D_cvvuu")
+debug_color = Color(0.98, 0, 0, 0.4745098)
+
+[node name="RightSlash" type="Area2D" parent="." unique_id=848582825]
+visible = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightSlash" unique_id=101777484]
+position = Vector2(18.5, -1.5)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="UpSlash" type="Area2D" parent="." unique_id=1044539735]
+visible = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpSlash" unique_id=2042208991]
+position = Vector2(-1, -30)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Pogo" type="Area2D" parent="." unique_id=1905850997]
+visible = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pogo" unique_id=794778084]
+position = Vector2(-1, 28)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="LeftSlash" type="Area2D" parent="." unique_id=48371204]
+visible = false
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftSlash" unique_id=2028553016]
+position = Vector2(-19, -1)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="ParryTimer" type="Timer" parent="." unique_id=839630041]
+wait_time = 0.5
+one_shot = true
+
+[node name="SlashTimer" type="Timer" parent="." unique_id=525837217]
+wait_time = 0.2
+one_shot = true
+
+[node name="KnockbackTimer" type="Timer" parent="." unique_id=226822759]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="hit_by_enemy"]
