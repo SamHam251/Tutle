@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_7k104"]
 [ext_resource type="Script" uid="uid://nparxq5lq60g" path="res://scripts/enemy_ground.gd" id="1_s4x8n"]
+[ext_resource type="Texture2D" uid="uid://beg6yic5jtnj0" path="res://assets/sprites/EnemySprites/Rhino Idle (1).png" id="3_ffhoh"]
+[ext_resource type="Texture2D" uid="uid://drq84n2imyyb2" path="res://assets/sprites/EnemySprites/Rhino charge.png" id="3_xi17v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
 size = Vector2(8, 25.5)
@@ -17,6 +19,61 @@ radius = 14.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
 size = Vector2(16, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g4cyr"]
+atlas = ExtResource("3_xi17v")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hywj"]
+atlas = ExtResource("3_xi17v")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rrt2"]
+atlas = ExtResource("3_xi17v")
+region = Rect2(0, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5g84"]
+atlas = ExtResource("3_xi17v")
+region = Rect2(36, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xi17v"]
+atlas = ExtResource("3_ffhoh")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sekqj"]
+atlas = ExtResource("3_ffhoh")
+region = Rect2(0, 36, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g4cyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hywj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rrt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5g84")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xi17v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sekqj")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [node name="EnemyGround" type="CharacterBody2D" unique_id=593195625]
 scale = Vector2(2, 2)
@@ -83,6 +140,12 @@ one_shot = true
 [node name="StunTimer" type="Timer" parent="Timers" unique_id=481345131]
 wait_time = 0.2
 one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1624192199]
+scale = Vector2(2.1666667, 2.1666667)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"attack"
+frame_progress = 0.4541569
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
