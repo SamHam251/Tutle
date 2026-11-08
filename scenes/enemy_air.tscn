@@ -100,6 +100,7 @@ collision_layer = 4
 script = ExtResource("1_1wx6a")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1886328244]
+visible = false
 scale = Vector2(0.26562503, 0.1328125)
 texture = ExtResource("1_a7ewt")
 
@@ -170,7 +171,7 @@ one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=842722556]
 position = Vector2(0.49999714, -0.49999905)
-scale = Vector2(1.9637587, 1.9284625)
+scale = Vector2(-1.964, 1.928)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"idle"
 frame_progress = 0.16673656

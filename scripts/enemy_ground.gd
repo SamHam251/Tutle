@@ -10,7 +10,7 @@ var hover_target = 0  # target.position.x - HOVER_RANGE / 2
 var target_in_dash_range = false
 
 # indicator and hitboxes
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var dash_hitbox: Area2D = $HitboxDash
 
 # timers
@@ -26,6 +26,7 @@ const DASH_SPEED = 1300.0
 const DASH_WINDUP = 0.4  # time in seconds between a dash being indicated and a dash happening
 const JUMP_VELOCITY = -200.0
 const DASH_TIME = 0.5
+var is_attacking = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -37,7 +38,6 @@ func _physics_process(delta: float) -> void:
 		move_to_target()
 	else:
 		velocity.x = move_toward(velocity.x, 0, ACCELERATION)
-
 	move_and_slide()
 
 func move_to_target() -> void:
@@ -53,11 +53,21 @@ func move_to_target() -> void:
 		velocity.x = move_toward(velocity.x, -SPEED, ACCELERATION)
 	else:
 		velocity.x = move_toward(velocity.x, 0, ACCELERATION)
-
+	if is_attacking == false:
+		if velocity.x > 0:
+				sprite.flip_h = false
+				sprite.play("idle")
+		else:
+			sprite.flip_h = true
+			sprite.play("idle")
 func dash_at_target() -> void:  # this function only PREPARES the dash and makes the indicator. (see _on_dash_timer_timeout()).
+	is_attacking = true
 	if target == null or not stun_timer.is_stopped(): return
+	sprite.play("attack")
 	sprite.modulate = Color(3, 3, 3, 1)
 	dash_timer.start(DASH_WINDUP)
+	await sprite.animation_finished
+	is_attacking = false
 	# print("dash queued")
 
 func _on_action_timer_timeout() -> void:  # do action function

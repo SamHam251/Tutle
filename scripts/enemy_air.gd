@@ -25,7 +25,7 @@ const ACTION_COOLDOWN_MIN = 1.0  # time in seconds
 const ACTION_COOLDOWN_MAX = 3.0  # time in seconds
 
 # indicator and hitboxes
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
 
 func _physics_process(delta: float) -> void:
@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 			attack_hitbox.visible = false
 	elif stun_timer.is_stopped():
 		hover_towards_target()
-
+	
 	move_and_slide()
 
 func action() -> void:  # calls when ActionTimer reaches 0.
@@ -61,6 +61,7 @@ func action() -> void:  # calls when ActionTimer reaches 0.
 func start_attack() -> void:  # calls when AttackTimer reaches 0.
 	sprite.modulate = Color(1, 1, 1, 1)
 	attacking = true
+	sprite.play("attack")
 	attack_hitbox.monitorable = true
 	attack_hitbox.visible = true
 	
@@ -68,9 +69,10 @@ func start_attack() -> void:  # calls when AttackTimer reaches 0.
 		rotation_direction = 1  # rotate clockwise
 	else:
 		rotation_direction = -1  # rotate counterclockwise
-
+	
 func hover_towards_target() -> void:
 	# print(target_in_hover_range)
+	
 	if target == null: return
 	
 	# X-axis: move towards target if they are outside of hover rect, move away if they are in the rect
@@ -97,7 +99,14 @@ func hover_towards_target() -> void:
 			velocity.y = move_toward(velocity.y, -SPEED.y, ACCELERATION.y)
 		else:
 			velocity.y = move_toward(velocity.y, SPEED.y, ACCELERATION.y)
-
+	if attacking == false:
+			if velocity.x > 0:
+					sprite.flip_h = false
+					sprite.play("idle")
+			else:
+				sprite.flip_h = true
+				sprite.play("idle")
+				
 func _on_detection_range_body_entered(body: Node2D) -> void:
 	print([body.is_in_group("friendly"), target])
 	if body.is_in_group("friendly") and target == null:
