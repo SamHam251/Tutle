@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://houtj6vtko84"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vue75"]
+load_path = "res://.godot/imported/Desert 640x250 SpriteSheet.png-da75820347dd69fa27f064dab34a36cd.ctex"
+
+[node name="Main Menu" type="Control" unique_id=727042448]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="Control" parent="." unique_id=1191267940]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="background" unique_id=1021027702]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("CompressedTexture2D_vue75")
