@@ -4,7 +4,7 @@ var damage = 25
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 @onready var ParryTimer = $"ParryTimer"
-@onready var original_color = $Sprite2D.modulate
+@onready var original_color = $AnimatedSprite2D.modulate
 var up_or_down = 0
 var slashable = true
 var in_range = false
@@ -13,6 +13,8 @@ var saved_direction = facing
 var lunge_vel = Vector2.ZERO
 var facing_direction = Vector2.DOWN
 @onready var CollisionHitbox = $CollisionHitbox
+var is_attacking = false
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 # Knockback constants and also iframes i guess
 const KNOCKBACK = Vector2(-200, -150)  # sets your velocity to this when you take damage. sign of x-value depends on the hit direction.
@@ -26,6 +28,8 @@ func _physics_process(delta: float) -> void:
 	saved_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if saved_direction != Vector2.ZERO:
 		facing = saved_direction
+	if not is_attacking:
+		sprite.play("idle")
 		
 	lunge_vel = lunge_vel.move_toward(Vector2.ZERO, 800.0*delta)
 	# Add the gravity.
@@ -38,9 +42,17 @@ func _physics_process(delta: float) -> void:
 
 		var direction := Input.get_axis("ui_left", "ui_right")
 		if direction:
-			
 			velocity.x = direction * SPEED
+			if velocity.x > 0:
+				if not is_attacking:
+					sprite.flip_h = false
+					sprite.play("running")
+			else:
+				if not is_attacking:
+					sprite.flip_h = true
+					sprite.play("running")
 		else:
+			
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.x += lunge_vel.x
 		if lunge_vel.y != 0:
@@ -48,44 +60,67 @@ func _physics_process(delta: float) -> void:
 				lunge_vel.y = 0
 			velocity.y = lunge_vel.y
 	
+	#velocity == Vector2.ZERO and
+
+		
 	move_and_slide()
 	#facing directions
 	if Input.is_action_just_pressed("Slash") and slashable == true:
+		is_attacking = true
 		if facing.y > 0 and not is_on_floor():
 			# print("Slashed down")
+			sprite.play("downslash")
 			slashable = false
 			$Pogo.monitoring = true
-			$Pogo/DownslashSprite.visible = true
 			$SlashTimer.start()
+			await sprite.animation_finished
+			is_attacking = false
+		elif facing.y > 0:
+				# print("Slashed left")
+			sprite.flip_h = true
+			sprite.play("slash")
+			slashable = false
+			$LeftSlash.monitoring = true
+			$SlashTimer.start()
+			await sprite.animation_finished
+			is_attacking = false
 		elif facing.y < 0:
 			# print("Slashed up")
+			sprite.play("spinning")
 			slashable = false
 			$UpSlash.monitoring = true
-			$"UpSlash/UpSlashSprite".visible = true
 			$SlashTimer.start()
+			await sprite.animation_finished
+			is_attacking = false
 		elif facing.x > 0:
+			sprite.flip_h = false
+			sprite.play("slash")
 			# print("Slashed right")
 			slashable = false
 			$RightSlash.monitoring = true
-			$RightSlash/RightSlashSprite.visible = true
 			$SlashTimer.start()
+			await sprite.animation_finished
+			is_attacking = false
 		elif facing.x < 0:
 			# print("Slashed left")
+			sprite.flip_h = true
+			sprite.play("slash")
 			slashable = false
-			$LeftSlash/LeftSlashSprite.visible = true
 			$LeftSlash.monitoring = true
 			$SlashTimer.start()
+			await sprite.animation_finished
+			is_attacking = false
 			
 	#parry
 	if Input.is_action_just_pressed("Parry"):
 		Global.parry = true
-		$Sprite2D.modulate = Color(original_color.r * 10, original_color.g * 10, original_color.b * 10, original_color.a)
+		sprite.modulate = Color(original_color.r * 10, original_color.g * 10, original_color.b * 10, original_color.a)
 		set_collision_layer_value(8, true)
 		ParryTimer.start()
 		reset_slash()
 
 func reset_parry() -> void:
-	$Sprite2D.modulate = original_color
+	sprite.modulate = original_color
 	Global.parry = false
 	Global.parried = false
 	set_collision_layer_value(8, false)
@@ -98,10 +133,6 @@ func reset_slash() -> void:  # called when slash timer hits 0
 	$UpSlash.monitoring = false
 	$Pogo.monitoring = false
 	$LeftSlash.monitoring = false
-	$RightSlash/RightSlashSprite.visible = false
-	$"UpSlash/UpSlashSprite".visible = false
-	$Pogo/DownslashSprite.visible = false
-	$LeftSlash/LeftSlashSprite.visible = false
 	slashable = true
 	# print("return")
 
