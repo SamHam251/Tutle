@@ -135,7 +135,7 @@ monitorable = false
 rotation = 3.1415925
 scale = Vector2(1, 7)
 shape = SubResource("SegmentShape2D_ankee")
-debug_color = Color(0.99, 0, 0, 0.2784314)
+debug_color = Color(0.99, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="AttackHitbox" unique_id=1089876580]
 visible = false

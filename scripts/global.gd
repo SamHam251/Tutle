@@ -43,9 +43,11 @@ func enemy_died() -> void:
 	player_health += killstreak
 
 func no_enemies_left() -> bool:
-	var game = get_tree().current_scene
+	var cur_scene = get_tree().current_scene
+	if cur_scene == null or not cur_scene.get_tree().get_nodes_in_group("friendly"):
+		return false  # this stops stuff from happening in main menu lol
 	
-	if game.get_tree().get_nodes_in_group("enemy"):
+	if cur_scene.get_tree().get_nodes_in_group("enemy"):
 		return false
 	
 	return true
