@@ -87,16 +87,6 @@ offset_bottom = 164.0
 text = "CHAIN RULE"
 label_settings = SubResource("LabelSettings_bqqt6")
 
-[node name="CreditsScreen" type="Control" parent="." unique_id=1106259664]
-anchors_preset = 0
-offset_right = 1150.0
-offset_bottom = 648.0
-
-[node name="ControlsScreen" type="Control" parent="." unique_id=860561910]
-anchors_preset = 0
-offset_right = 1150.0
-offset_bottom = 648.0
-
 [node name="Button" type="Button" parent="." unique_id=1892171193]
 layout_mode = 0
 offset_left = 129.0
@@ -147,5 +137,15 @@ text = "Credits"
 label_settings = SubResource("LabelSettings_ekxnf")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ControlsScreen" type="Control" parent="." unique_id=860561910]
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 648.0
+
+[node name="CreditsScreen" type="Control" parent="." unique_id=1106259664]
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 648.0
 
 [connection signal="pressed" from="Button2" to="." method="pressed_play"]
