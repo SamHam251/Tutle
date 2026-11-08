@@ -12,6 +12,7 @@ var facing = Vector2.LEFT
 var saved_direction = facing
 var lunge_vel = Vector2.ZERO
 var facing_direction = Vector2.DOWN
+var is_attacking = false
 
 # Knockback constants and also iframes i guess
 const KNOCKBACK = Vector2(-200, -150)  # sets your velocity to this when you take damage. sign of x-value depends on the hit direction.
@@ -22,6 +23,11 @@ func _physics_process(delta: float) -> void:
 	var saved_direction: Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if saved_direction != Vector2.ZERO:
 		facing = saved_direction
+	else:
+		if is_attacking == true:
+			pass
+		else: 
+			$AnimatedSprite2D.play("idle")
 		
 	lunge_vel = lunge_vel.move_toward(Vector2.ZERO, 800.0*delta)
 	# Add the gravity.
@@ -36,6 +42,14 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			
 			velocity.x = direction * SPEED
+			if velocity.x > 0:
+				if not is_attacking:
+					$AnimatedSprite2D.flip_h = false
+					$AnimatedSprite2D.play("running")
+			else: 
+				if not is_attacking:
+					$AnimatedSprite2D.flip_h = true
+					$AnimatedSprite2D.play("running")
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.x += lunge_vel.x
@@ -44,17 +58,55 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	#facing directions
+<<<<<<< Updated upstream
 	if Input.is_action_pressed("Slash") and slashable == true:
 		if facing.x > 0:
+=======
+	if Input.is_action_just_pressed("Slash") and slashable == true:
+		is_attacking = true
+		if facing.y > 0:
+			print("Slashed down")
+			$AnimatedSprite2D.play("downslash")
+			slashable = false
+			$Pogo.monitoring = true
+			$Pogo/DownslashSprite.visible = true
+			$SlashTimer.start()
+			await $AnimatedSprite2D.animation_finished
+			is_attacking = false
+		elif facing.y < 0:
+			print("Slashed up")
+			$AnimatedSprite2D.play("upslash")
+			
+			slashable = false
+			$UpSlash.monitoring = true
+			$"UpSlash/UpSlashSprite".visible = true
+			$SlashTimer.start()
+			await $AnimatedSprite2D.animation_finished
+			is_attacking = false
+		elif facing.x > 0:
+>>>>>>> Stashed changes
 			print("Slashed right")
+			$AnimatedSprite2D.flip_h = false
+			$AnimatedSprite2D.play("slash")
 			slashable = false
 			$RightSlash.monitoring = true
+<<<<<<< Updated upstream
 			$RightSlash/RightSlashSprite.visible = true
 			$"../SlashTimer".start()
+=======
+			#$RightSlash/RightSlashSprite.visible = true
+			$SlashTimer.start()
+			await $AnimatedSprite2D.animation_finished
+			is_attacking = false
+>>>>>>> Stashed changes
 		elif facing.x < 0:
 			print("Slashed left")
+			$AnimatedSprite2D.flip_h = true
+			$AnimatedSprite2D.play("slash")
+			await $AnimatedSprite2D.animation_finished
+			is_attacking = false
 			slashable = false
-			$LeftSlash/LeftSlashSprite.visible = true
+			#$LeftSlash/LeftSlashSprite.visible = true
 			$LeftSlash.monitoring = true
 			$"../SlashTimer".start()
 		elif facing.y > 0:
@@ -111,7 +163,11 @@ func _on_right_slash_area_entered(area: Area2D) -> void:
 	var enemy = area.get_parent()
 	slash_attack(enemy, Vector2.RIGHT)
 
+<<<<<<< Updated upstream
 #func slashing(enemy):
+=======
+func slashing(enemy):
+>>>>>>> Stashed changes
 	print("slashed")
 	if enemy is Enemy:
 		var diff = enemy.global_position - global_position 
@@ -122,7 +178,11 @@ func _on_right_slash_area_entered(area: Area2D) -> void:
 			knockback.y = sign(diff.y) # Purely up (-1) or down (1)
 		enemy.take_damage(damage, knockback*500)
 		lunge_vel = knockback*500
+<<<<<<< Updated upstream
 		
+=======
+
+>>>>>>> Stashed changes
 func slash_attack(enemy, direction: Vector2):
 	if enemy is Enemy:
 		enemy.take_damage(damage, direction*500)
