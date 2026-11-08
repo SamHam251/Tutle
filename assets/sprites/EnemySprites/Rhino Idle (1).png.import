@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c38a8je4xpju8"
-path="res://.godot/imported/spinning animation (1).png-bda95ff38f63668ff895ed72b8a33dfe.ctex"
+uid="uid://beg6yic5jtnj0"
+path="res://.godot/imported/Rhino Idle (1).png-01b827a9a8039ae82d8a8440636eab1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/PlayerSprites/spinning animation (1).png"
-dest_files=["res://.godot/imported/spinning animation (1).png-bda95ff38f63668ff895ed72b8a33dfe.ctex"]
+source_file="res://assets/sprites/EnemySprites/Rhino Idle (1).png"
+dest_files=["res://.godot/imported/Rhino Idle (1).png-01b827a9a8039ae82d8a8440636eab1a.ctex"]
 
 [params]
 

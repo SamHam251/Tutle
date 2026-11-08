@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://houtj6vtko84"]
+
+[ext_resource type="Script" uid="uid://br1tsvf6kxm1g" path="res://scripts/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://va8j0kw1lrly" path="res://assets/sprites/Desert 640x250 SpriteSheet.png" id="1_l6cm7"]
+[ext_resource type="FontFile" uid="uid://c15qhfd8lcug1" path="res://assets/PixelPurl.ttf" id="2_ekxnf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bqqt6"]
+font = ExtResource("2_ekxnf")
+font_size = 92
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 11
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-15.44, 5.26)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ekxnf"]
+font = ExtResource("2_ekxnf")
+font_size = 68
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-7.575, 6.985)
+
+[node name="Main Menu" type="Control" unique_id=727042448]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqqt6")
+
+[node name="background" type="Control" parent="." unique_id=1191267940]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="bg" type="Sprite2D" parent="background" unique_id=1786349048]
+position = Vector2(613, 325)
+scale = Vector2(2.6459997, 2.646)
+texture = ExtResource("1_l6cm7")
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 250)
+
+[node name="sun" type="Sprite2D" parent="background" unique_id=1006722824]
+position = Vector2(613, 209.31252)
+scale = Vector2(1.6774998, 1.6774999)
+texture = ExtResource("1_l6cm7")
+region_enabled = true
+region_rect = Rect2(0, 250, 640, 250)
+
+[node name="clouds" type="Sprite2D" parent="background" unique_id=1215476300]
+position = Vector2(613, 325)
+scale = Vector2(2.6459997, 2.646)
+texture = ExtResource("1_l6cm7")
+region_enabled = true
+region_rect = Rect2(0, 500, 640, 250)
+
+[node name="fg1" type="Sprite2D" parent="background" unique_id=1730669468]
+position = Vector2(613, 325)
+scale = Vector2(2.6459997, 2.646)
+texture = ExtResource("1_l6cm7")
+region_enabled = true
+region_rect = Rect2(0, 750, 640, 250)
+
+[node name="fg2" type="Sprite2D" parent="background" unique_id=425019092]
+position = Vector2(613, 325)
+scale = Vector2(2.6459997, 2.646)
+texture = ExtResource("1_l6cm7")
+region_enabled = true
+region_rect = Rect2(0, 1000, 640, 250)
+
+[node name="fg3" type="Sprite2D" parent="background" unique_id=493552696]
+position = Vector2(613, 325)
+scale = Vector2(2.6459997, 2.646)
+texture = ExtResource("1_l6cm7")
+region_enabled = true
+region_rect = Rect2(0, 1250, 640, 250)
+
+[node name="title" type="Label" parent="." unique_id=1254559740]
+layout_mode = 0
+offset_left = 390.0
+offset_top = 84.0
+offset_right = 746.0
+offset_bottom = 164.0
+text = "CHAIN RULE"
+label_settings = SubResource("LabelSettings_bqqt6")
+
+[node name="CreditsScreen" type="Control" parent="." unique_id=1106259664]
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 648.0
+
+[node name="ControlsScreen" type="Control" parent="." unique_id=860561910]
+anchors_preset = 0
+offset_right = 1150.0
+offset_bottom = 648.0
+
+[node name="Button" type="Button" parent="." unique_id=1892171193]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 325.0
+offset_right = 339.0
+offset_bottom = 396.0
+
+[node name="Label" type="Label" parent="Button" unique_id=1408781038]
+layout_mode = 0
+offset_right = 210.0
+offset_bottom = 71.0
+mouse_filter = 1
+text = "Controls"
+label_settings = SubResource("LabelSettings_ekxnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button2" type="Button" parent="." unique_id=27155015]
+layout_mode = 0
+offset_left = 444.0
+offset_top = 278.0
+offset_right = 654.0
+offset_bottom = 349.0
+
+[node name="Label" type="Label" parent="Button2" unique_id=1787880237]
+layout_mode = 0
+offset_right = 210.0
+offset_bottom = 71.0
+mouse_filter = 1
+text = "Play"
+label_settings = SubResource("LabelSettings_ekxnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button3" type="Button" parent="." unique_id=676803067]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 325.0
+offset_right = 978.0
+offset_bottom = 396.0
+
+[node name="Label" type="Label" parent="Button3" unique_id=1218421080]
+layout_mode = 0
+offset_right = 210.0
+offset_bottom = 71.0
+mouse_filter = 1
+text = "Credits"
+label_settings = SubResource("LabelSettings_ekxnf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button2" to="." method="pressed_play"]

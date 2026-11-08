@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4juxhgycwudd"
-path="res://.godot/imported/slashing animation (2).png-3ebb3ea07b018687d3e7596d88227992.ctex"
+uid="uid://xdxc30cgdabi"
+path="res://.godot/imported/idle animation.png-aaea9a7ea85aaff1c649828ba6ad85aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/PlayerSprites/slashing animation (2).png"
-dest_files=["res://.godot/imported/slashing animation (2).png-3ebb3ea07b018687d3e7596d88227992.ctex"]
+source_file="res://assets/sprites/PlayerSprites/idle animation.png"
+dest_files=["res://.godot/imported/idle animation.png-aaea9a7ea85aaff1c649828ba6ad85aa.ctex"]
 
 [params]
 

@@ -5,11 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://cg2gacxnahyrm" path="res://scenes/background.tscn" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://oy67rn0cumj3" path="res://scenes/player.tscn" id="2_yqjtg"]
-[ext_resource type="PackedScene" uid="uid://b5myhbv8ntedf" path="res://scenes/enemy_ground.tscn" id="3_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://cygu13je36f3i" path="res://scenes/enemy_air.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://c1kkxundm2afe" path="res://scenes/enemy_testing.tscn" id="3_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://b5myhbv8ntedf" path="res://scenes/enemy_ground.tscn" id="5_iywne"]
-[ext_resource type="PackedScene" uid="uid://cygu13je36f3i" path="res://scenes/enemy_air.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://dyijppicet52a" path="res://scenes/wall.tscn" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://uvhygrcasvns" path="res://scenes/tilemap.tscn" id="6_p57ef"]
 
@@ -19,7 +14,6 @@ size = Vector2(1650, 152)
 [node name="Game" type="Node2D" unique_id=1783197433]
 script = ExtResource("1_iywne")
 
-<<<<<<< Updated upstream
 [node name="Floor" type="StaticBody2D" parent="." unique_id=708615000]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=344124560]
@@ -30,27 +24,11 @@ shape = SubResource("RectangleShape2D_cvvuu")
 position = Vector2(-1.2636185e-05, -1.50203705e-05)
 scale = Vector2(12.890625, 1.1875)
 texture = ExtResource("1_uwrxv")
-=======
 [node name="Background" parent="." unique_id=542417220 instance=ExtResource("2_u5sy4")]
->>>>>>> Stashed changes
 
 [node name="Player" parent="." unique_id=592343652 instance=ExtResource("2_yqjtg")]
 position = Vector2(381, 441)
 scale = Vector2(2, 2)
-
-[node name="EnemyGround" parent="." unique_id=593195625 instance=ExtResource("3_lnu2h")]
-position = Vector2(846, 455)
-
-[node name="EnemyAir" parent="." unique_id=1416769464 instance=ExtResource("4_lbhrr")]
-position = Vector2(626, 165)
-[node name="EnemyTesting" parent="." unique_id=1303977691 instance=ExtResource("3_lnu2h")]
-position = Vector2(736, 469)
-
-[node name="EnemyGround" parent="." unique_id=593195625 instance=ExtResource("5_iywne")]
-position = Vector2(900, 437)
-
-[node name="EnemyAir" parent="." unique_id=1416769464 instance=ExtResource("6_p57ef")]
-position = Vector2(727, 275)
 
 [node name="Walls" type="Node2D" parent="." unique_id=45914900]
 
@@ -65,8 +43,6 @@ rotation = 1.5707964
 position = Vector2(1160, -53)
 rotation = 1.5707964
 
-<<<<<<< Updated upstream
-=======
 [node name="Floor" type="StaticBody2D" parent="." unique_id=708615000]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=344124560]
@@ -78,7 +54,17 @@ position = Vector2(1.9999876, -1.0000153)
 scale = Vector2(12.890625, 1.1875)
 texture = ExtResource("1_uwrxv")
 
->>>>>>> Stashed changes
+[node name="Floor" type="StaticBody2D" parent="." unique_id=708615000]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=344124560]
+position = Vector2(572, 595)
+shape = SubResource("RectangleShape2D_cvvuu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor/CollisionShape2D" unique_id=145422301]
+position = Vector2(-1.2636185e-05, -1.50203705e-05)
+scale = Vector2(12.890625, 1.1875)
+texture = ExtResource("1_uwrxv")
+
 [node name="UI" parent="." unique_id=835666112 instance=ExtResource("1_lbhrr")]
 
 [node name="Foreground" parent="." unique_id=1940212275 instance=ExtResource("6_p57ef")]

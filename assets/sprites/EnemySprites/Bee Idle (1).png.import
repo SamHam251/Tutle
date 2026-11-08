@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6rogwsa38k6p"
-path="res://.godot/imported/Bee Idle (1).png-abd56b336e5b8152a7ce450e43c4d388.ctex"
+uid="uid://bovld57yr71ah"
+path="res://.godot/imported/Bee Idle (1).png-f5f382814930d43f775ceb7b5c46e7e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/PlayerSprites/Bee Idle (1).png"
-dest_files=["res://.godot/imported/Bee Idle (1).png-abd56b336e5b8152a7ce450e43c4d388.ctex"]
+source_file="res://assets/sprites/EnemySprites/Bee Idle (1).png"
+dest_files=["res://.godot/imported/Bee Idle (1).png-f5f382814930d43f775ceb7b5c46e7e7.ctex"]
 
 [params]
 

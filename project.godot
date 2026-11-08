@@ -28,6 +28,7 @@ Global="*uid://ds45tmuhy7nk3"
 SlashHitbox=""
 friendly=""
 player=""
+enemy=""
 
 [input]
 

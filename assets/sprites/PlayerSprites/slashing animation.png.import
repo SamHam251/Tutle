@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs6t5mqvn6v21"
-path="res://.godot/imported/Bee Idle.png-27aeefe18958138a7e57c3f2457a85e3.ctex"
+uid="uid://dkia36bj2eqds"
+path="res://.godot/imported/slashing animation.png-c83fad08e7bb2f435abf033b53a0c988.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/EnemySprites/Bee Idle.png"
-dest_files=["res://.godot/imported/Bee Idle.png-27aeefe18958138a7e57c3f2457a85e3.ctex"]
+source_file="res://assets/sprites/PlayerSprites/slashing animation.png"
+dest_files=["res://.godot/imported/slashing animation.png-c83fad08e7bb2f435abf033b53a0c988.ctex"]
 
 [params]
 

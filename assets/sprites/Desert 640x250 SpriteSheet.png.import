@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5e0k1schf1bf"
-path="res://.godot/imported/idle animation (1).png-e1b23d0b26b16f245b0a5984572ed41c.ctex"
+uid="uid://va8j0kw1lrly"
+path="res://.godot/imported/Desert 640x250 SpriteSheet.png-da75820347dd69fa27f064dab34a36cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/PlayerSprites/idle animation (1).png"
-dest_files=["res://.godot/imported/idle animation (1).png-e1b23d0b26b16f245b0a5984572ed41c.ctex"]
+source_file="res://assets/sprites/Desert 640x250 SpriteSheet.png"
+dest_files=["res://.godot/imported/Desert 640x250 SpriteSheet.png-da75820347dd69fa27f064dab34a36cd.ctex"]
 
 [params]
 

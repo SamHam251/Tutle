@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccx0yty768i8p"
-path="res://.godot/imported/ground slam.png-87dde368e5ce21d3570adeaa206962b8.ctex"
+uid="uid://drq84n2imyyb2"
+path="res://.godot/imported/Rhino charge.png-b3a90b0d2530ff70ecc35a670bccbff8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/PlayerSprites/ground slam.png"
-dest_files=["res://.godot/imported/ground slam.png-87dde368e5ce21d3570adeaa206962b8.ctex"]
+source_file="res://assets/sprites/EnemySprites/Rhino charge.png"
+dest_files=["res://.godot/imported/Rhino charge.png-b3a90b0d2530ff70ecc35a670bccbff8.ctex"]
 
 [params]
 

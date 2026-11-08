@@ -114,7 +114,7 @@ func end_dash() -> void:  # called when DashEndTimer reaches 0. timer is started
 
 func take_damage(damage, knockback):
 	health -= damage
-	print(health)
+	#print(health)
 	velocity += knockback
 	stun_timer.start()
 	# print("Knockback passed in: ", knockback)
@@ -122,3 +122,9 @@ func take_damage(damage, knockback):
 	if health <= 0:
 		queue_free()
 		Global.enemy_died()
+
+func parry_check(area: Area2D) -> void:  # calls when Hurtbox hits the player
+	print(area.get_collision_layer_value(8))
+	if area.get_collision_layer_value(8):
+		print("parried")
+		end_dash()
