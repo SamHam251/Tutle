@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://dismhax8glg1o"]
+
+[ext_resource type="FontFile" uid="uid://c15qhfd8lcug1" path="res://assets/PixelPurl.ttf" id="1_rmovf"]
+
+[resource]
+font = ExtResource("1_rmovf")
+font_size = 48

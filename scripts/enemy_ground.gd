@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Enemy
 
 const SPEED = 200.0
 const ACCELERATION = 30.0
@@ -17,6 +17,7 @@ var target_in_dash_range = false
 @onready var action_timer = $Timers/ActionTimer
 @onready var dash_timer = $Timers/DashTimer
 @onready var dash_end_timer = $Timers/DashEndTimer
+@onready var stun_timer = $Timers/StunTimer
 const ACTION_COOLDOWN_MIN = 1.0  # time in seconds
 const ACTION_COOLDOWN_MAX = 3.0  # time in seconds
 
@@ -31,17 +32,17 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	if target != null:
+	if target != null or stun_timer.is_stopped():
 		# AI when there is a target
 		move_to_target()
 	else:
-		pass  # AI when no target in range (do we even need to do this?)
+		velocity.x = move_toward(velocity.x, 0, ACCELERATION)
 
 	move_and_slide()
 
 func move_to_target() -> void:
 	# more accurately, the enemy will hover around the target to keep it just barely in the DashRange collider.
-	if target == null: return  # shouldn't happen but doesn't hurt to be safe. this stops the function if there is no target
+	if target == null or not stun_timer.is_stopped(): return  # shouldn't happen but doesn't hurt to be safe. this stops the function if there is no target
 	
 	# sign(position.x - target.position.x) is positive if the player is on the right, and negative if the player is on the left.
 	hover_target = target.position.x + (HOVER_RANGE * 0.6 * sign(position.x - target.position.x))
@@ -54,7 +55,7 @@ func move_to_target() -> void:
 		velocity.x = move_toward(velocity.x, 0, ACCELERATION)
 
 func dash_at_target() -> void:  # this function only PREPARES the dash and makes the indicator. (see _on_dash_timer_timeout()).
-	if target == null: return
+	if target == null or not stun_timer.is_stopped(): return
 	sprite.modulate = Color(3, 3, 3, 1)
 	dash_timer.start(DASH_WINDUP)
 	# print("dash queued")
@@ -67,7 +68,7 @@ func _on_action_timer_timeout() -> void:  # do action function
 	# print("Action")
 
 	# if target is in dash range (i.e. near the ground), and the enemy is on the ground, do a dash
-	if target_in_dash_range and is_on_floor():
+	if target_in_dash_range and is_on_floor() and stun_timer.is_stopped():
 		dash_at_target()
 		action_timer.stop()  # this will be restarted after the dash is complete
 	
@@ -110,3 +111,14 @@ func _on_dash_range_body_exited(body: Node2D) -> void:
 
 func end_dash() -> void:  # called when DashEndTimer reaches 0. timer is started when the dash starts.
 	dash_hitbox.monitorable = false
+
+func take_damage(damage, knockback):
+	health -= damage
+	print(health)
+	velocity += knockback
+	stun_timer.start()
+	# print("Knockback passed in: ", knockback)
+	
+	if health <= 0:
+		queue_free()
+		Global.enemy_died()

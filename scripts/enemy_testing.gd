@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 var in_range = false
-@export var health = 100
+@export var health = 150 + Global.score / 20
 var knockback_vel = Vector2.ZERO
 var move = 15
 
@@ -18,25 +18,27 @@ func _process(delta: float) -> void:
 			
 #this is for the walking, jumping, gravity, and the knockback
 func _physics_process(delta: float) -> void:
+	
+	knockback_vel = knockback_vel.move_toward(Vector2.ZERO, 800.0*delta)
+	# velocity = knockback_vel
+	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	knockback_vel = knockback_vel.move_toward(Vector2.ZERO, 800.0*delta)
-	velocity = knockback_vel
 	move_and_slide()
 
 #this just determines if your in range to parry the monster
-func _on_hurtbox_body_entered(body: Node2D) -> void:
+func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	in_range = true
 
 #this just determines if your out range to parry the monster
-func _on_hurtbox_body_exited(body: Node2D) -> void:
+func _on_hurtbox_body_exited(_body: Node2D) -> void:
 	in_range = false
 
 #this is the damaging enemies function which lets you combo enemies
 func take_damage(damage, knockback):
 	health -= damage
 	print(health)
-	knockback_vel = knockback
+	velocity += knockback
 	print("Knockback passed in: ", knockback)
 	if health <= 0:
 		queue_free()
