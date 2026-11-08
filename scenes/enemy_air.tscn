@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cygu13je36f3i"]
 
 [ext_resource type="Script" uid="uid://675xqyunanjm" path="res://scripts/enemy_air.gd" id="1_1wx6a"]
-[ext_resource type="Texture2D" uid="uid://barq67eed08is" path="res://icon.svg" id="1_a7ewt"]
+[ext_resource type="Texture2D" uid="uid://b6rogwsa38k6p" path="res://assets/sprites/PlayerSprites/Bee Idle (1).png" id="2_1wx6a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
 size = Vector2(26, 12)
@@ -14,6 +14,42 @@ size = Vector2(106, 77.25)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_ankee"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijq06"]
+atlas = ExtResource("2_1wx6a")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4urfx"]
+atlas = ExtResource("2_1wx6a")
+region = Rect2(36, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5gra"]
+atlas = ExtResource("2_1wx6a")
+region = Rect2(0, 36, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ddnjl"]
+atlas = ExtResource("2_1wx6a")
+region = Rect2(36, 36, 36, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a7ewt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijq06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4urfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5gra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddnjl")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jg2fy"]
 size = Vector2(34, 17)
 
@@ -21,10 +57,6 @@ size = Vector2(34, 17)
 scale = Vector2(2, 2)
 collision_layer = 4
 script = ExtResource("1_1wx6a")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1886328244]
-scale = Vector2(0.26562503, 0.1328125)
-texture = ExtResource("1_a7ewt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1378516277]
 shape = SubResource("RectangleShape2D_cvvuu")
@@ -86,6 +118,11 @@ autostart = true
 
 [node name="AttackTimer" type="Timer" parent="Timers" unique_id=1625573927]
 one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1889352750]
+position = Vector2(-1.0000001, -1)
+scale = Vector2(1.5590278, 1.5590278)
+sprite_frames = SubResource("SpriteFrames_a7ewt")
 
 [node name="StunTimer" type="Timer" parent="Timers" unique_id=277720346]
 wait_time = 0.2

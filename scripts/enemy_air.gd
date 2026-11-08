@@ -25,11 +25,11 @@ const ACTION_COOLDOWN_MIN = 1.0  # time in seconds
 const ACTION_COOLDOWN_MAX = 3.0  # time in seconds
 
 # indicator and hitboxes
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_hitbox: Area2D = $AttackHitbox
 
 func _physics_process(delta: float) -> void:
-	
+	sprite.play("default")
 	#if not attack_timer.is_stopped():
 		#velocity.x = move_toward(velocity.x, 0, ACCELERATION.x * 1.5)
 		#velocity.y = move_toward(velocity.y, 0, ACCELERATION.y * 1.5)
@@ -68,7 +68,6 @@ func start_attack() -> void:  # calls when AttackTimer reaches 0.
 		rotation_direction = 1  # rotate clockwise
 	else:
 		rotation_direction = -1  # rotate counterclockwise
-
 func hover_towards_target() -> void:
 	# print(target_in_hover_range)
 	if target == null: return

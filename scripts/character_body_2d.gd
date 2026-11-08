@@ -12,6 +12,7 @@ var facing = Vector2.LEFT
 var saved_direction = facing
 var lunge_vel = Vector2.ZERO
 var facing_direction = Vector2.DOWN
+var is_attacking = false
 @onready var CollisionHitbox = $CollisionHitbox
 
 # Knockback constants and also iframes i guess
@@ -26,6 +27,11 @@ func _physics_process(delta: float) -> void:
 	saved_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if saved_direction != Vector2.ZERO:
 		facing = saved_direction
+	else:
+		if is_attacking == true:
+			pass
+		else: 
+			$AnimatedSprite2D.play("idle")
 		
 	lunge_vel = lunge_vel.move_toward(Vector2.ZERO, 800.0*delta)
 	# Add the gravity.
@@ -40,6 +46,14 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			
 			velocity.x = direction * SPEED
+			if velocity.x > 0:
+				if not is_attacking:
+					$AnimatedSprite2D.flip_h = false
+					$AnimatedSprite2D.play("running")
+			else: 
+				if not is_attacking:
+					$AnimatedSprite2D.flip_h = true
+					$AnimatedSprite2D.play("running")
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.x += lunge_vel.x
@@ -50,31 +64,52 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	#facing directions
+
 	if Input.is_action_just_pressed("Slash") and slashable == true:
 		if facing.y > 0 and not is_on_floor():
 			# print("Slashed down")
+      $AnimatedSprite2D.play("downslash")
+
 			slashable = false
 			$Pogo.monitoring = true
 			$Pogo/DownslashSprite.visible = true
 			$SlashTimer.start()
+			await $AnimatedSprite2D.animation_finished
+			is_attacking = false	
 		elif facing.y < 0:
 			# print("Slashed up")
+      $AnimatedSprite2D.play("upslash")
+      
 			slashable = false
 			$UpSlash.monitoring = true
-			$"UpSlash/UpSlashSprite".visible = true
+			# $UpSlash/UpslashSprite.visible = true
 			$SlashTimer.start()
+      await $AnimatedSprite2D.animation_finished
+			is_attacking = false
 		elif facing.x > 0:
 			# print("Slashed right")
+			$AnimatedSprite2D.flip_h = false
+			$AnimatedSprite2D.play("slash")
+
 			slashable = false
 			$RightSlash.monitoring = true
-			$RightSlash/RightSlashSprite.visible = true
 			$SlashTimer.start()
+			# $RightSlash/RightSlashSprite.visible = true
+      
+			await $AnimatedSprite2D.animation_finished
+			is_attacking = false
 		elif facing.x < 0:
 			# print("Slashed left")
-			slashable = false
-			$LeftSlash/LeftSlashSprite.visible = true
+			$AnimatedSprite2D.flip_h = true
+			$AnimatedSprite2D.play("slash")
+      
+      $SlashTimer.start()
+      slashable = false
+			#$LeftSlash/LeftSlashSprite.visible = true
 			$LeftSlash.monitoring = true
-			$SlashTimer.start()
+      
+			await $AnimatedSprite2D.animation_finished
+			is_attacking = false
 			
 	#parry
 	if Input.is_action_just_pressed("Parry"):
