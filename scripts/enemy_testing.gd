@@ -25,11 +25,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 #this just determines if your in range to parry the monster
-func _on_hurtbox_body_entered(body: Node2D) -> void:
+func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	in_range = true
 
 #this just determines if your out range to parry the monster
-func _on_hurtbox_body_exited(body: Node2D) -> void:
+func _on_hurtbox_body_exited(_body: Node2D) -> void:
 	in_range = false
 
 #this is the damaging enemies function which lets you combo enemies

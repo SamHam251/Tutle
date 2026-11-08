@@ -14,7 +14,7 @@ script = ExtResource("1_qyon3")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1341506084]
 position = Vector2(0, 0.5)
-collision_layer = 2
+collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=793722092]
 shape = SubResource("RectangleShape2D_yf5fn")
