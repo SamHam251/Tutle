@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 200.0
 const ACCELERATION = 30.0
 @onready var HOVER_RANGE: int = $DashRange/CollisionShape2D.shape.size.x  # this should never change but I can't make it a constant :(
 
@@ -16,6 +16,7 @@ var target_in_dash_range = false
 # timers
 @onready var action_timer = $Timers/ActionTimer
 @onready var dash_timer = $Timers/DashTimer
+@onready var dash_end_timer = $Timers/DashEndTimer
 const ACTION_COOLDOWN_MIN = 1.0  # time in seconds
 const ACTION_COOLDOWN_MAX = 3.0  # time in seconds
 
@@ -23,13 +24,12 @@ const ACTION_COOLDOWN_MAX = 3.0  # time in seconds
 const DASH_SPEED = 1300.0
 const DASH_WINDUP = 0.4  # time in seconds between a dash being indicated and a dash happening
 const JUMP_VELOCITY = -200.0
+const DASH_TIME = 0.5
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	else:
-		dash_hitbox.monitoring = false
 	
 	if target != null:
 		# AI when there is a target
@@ -87,7 +87,8 @@ func _on_dash_timer_timeout() -> void:  # timer starts when a dash is queued. th
 		dash_hitbox.scale.x = -1
 	velocity.y = JUMP_VELOCITY
 	
-	dash_hitbox.monitoring = true
+	dash_hitbox.monitorable = true
+	dash_end_timer.start(DASH_TIME)
 	
 	action_timer.start(randf_range(ACTION_COOLDOWN_MIN, ACTION_COOLDOWN_MAX))
 
@@ -106,3 +107,6 @@ func _on_dash_range_body_exited(body: Node2D) -> void:
 	if body == target:
 		# print("target left dash range")
 		target_in_dash_range = false
+
+func end_dash() -> void:  # called when DashEndTimer reaches 0. timer is started when the dash starts.
+	dash_hitbox.monitorable = false

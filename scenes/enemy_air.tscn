@@ -44,13 +44,14 @@ shape = SubResource("RectangleShape2D_2fjjf")
 debug_color = Color(0.8549998, 0, 0.9, 0.05490196)
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=2043474585]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 144
 monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=693489436]
-rotation = -3.1415927
-scale = Vector2(7, 7)
+rotation = 3.1415925
+scale = Vector2(1, 7)
 shape = SubResource("SegmentShape2D_ankee")
 debug_color = Color(0.99, 0, 0, 0.2784314)
 
@@ -74,5 +75,6 @@ one_shot = true
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
 [connection signal="body_entered" from="HoverRange" to="." method="_on_hover_range_body_entered"]
 [connection signal="body_exited" from="HoverRange" to="." method="_on_hover_range_body_exited"]
+[connection signal="area_entered" from="AttackHitbox" to="." method="hit_by_attack"]
 [connection signal="timeout" from="Timers/ActionTimer" to="." method="action"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="start_attack"]
