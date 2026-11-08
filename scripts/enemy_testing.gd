@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 var in_range = false
-@export var health = 150 + Global.score / 20
+@export var health = 100 + Global.score / 20
 var knockback_vel = Vector2.ZERO
 var move = 15
 

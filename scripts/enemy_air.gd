@@ -59,6 +59,7 @@ func action() -> void:  # calls when ActionTimer reaches 0.
 	attack_timer.start(ATTACK_WINDUP)
 
 func start_attack() -> void:  # calls when AttackTimer reaches 0.
+	if target == null: return
 	sprite.modulate = Color(1, 1, 1, 1)
 	attacking = true
 	sprite.play("attack")
@@ -100,12 +101,12 @@ func hover_towards_target() -> void:
 		else:
 			velocity.y = move_toward(velocity.y, SPEED.y, ACCELERATION.y)
 	if attacking == false:
-			if velocity.x > 0:
-					sprite.flip_h = false
-					sprite.play("idle")
-			else:
-				sprite.flip_h = true
+		if position.x < target.position.x:
+				sprite.flip_h = false
 				sprite.play("idle")
+		else:
+			sprite.flip_h = true
+			sprite.play("idle")
 				
 func _on_detection_range_body_entered(body: Node2D) -> void:
 	print([body.is_in_group("friendly"), target])

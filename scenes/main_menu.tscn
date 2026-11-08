@@ -22,6 +22,15 @@ shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(-7.575, 6.985)
 
+[sub_resource type="LabelSettings" id="LabelSettings_wu84c"]
+font = ExtResource("2_ekxnf")
+font_size = 48
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 9
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(-3.475, 7.195)
+
 [node name="Main Menu" type="Control" unique_id=727042448]
 layout_mode = 3
 anchors_preset = 15
@@ -87,17 +96,8 @@ offset_bottom = 164.0
 text = "CHAIN RULE"
 label_settings = SubResource("LabelSettings_bqqt6")
 
-[node name="CreditsScreen" type="Control" parent="." unique_id=1106259664]
-anchors_preset = 0
-offset_right = 1150.0
-offset_bottom = 648.0
-
-[node name="ControlsScreen" type="Control" parent="." unique_id=860561910]
-anchors_preset = 0
-offset_right = 1150.0
-offset_bottom = 648.0
-
 [node name="Button" type="Button" parent="." unique_id=1892171193]
+visible = false
 layout_mode = 0
 offset_left = 129.0
 offset_top = 325.0
@@ -132,6 +132,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button3" type="Button" parent="." unique_id=676803067]
+visible = false
 layout_mode = 0
 offset_left = 768.0
 offset_top = 325.0
@@ -147,5 +148,16 @@ text = "Credits"
 label_settings = SubResource("LabelSettings_ekxnf")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="." unique_id=886778551]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 396.0
+offset_right = 746.0
+offset_bottom = 525.0
+text = "Move - WASD or Arrows
+Attack - Left Click or K
+Parry - Right Click or L"
+label_settings = SubResource("LabelSettings_wu84c")
 
 [connection signal="pressed" from="Button2" to="." method="pressed_play"]

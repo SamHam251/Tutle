@@ -233,10 +233,10 @@ func hit_by_enemy(area: Area2D) -> void:  # calls when the player's hurtbox coll
 		ParryCDTimer.stop()
 		# print("Parried an attack")
 		return
-	
-	Global.took_damage()
 	# print("agugauguaguaguaga ", Global.player_health)
 	
 	# (lose health here)
 	velocity = Vector2(KNOCKBACK.x * -sign(enemy.velocity.x) + enemy.velocity.x * 0.2, KNOCKBACK.y)
 	KnockbackTimer.start(STUN_TIME)
+	
+	Global.took_damage()

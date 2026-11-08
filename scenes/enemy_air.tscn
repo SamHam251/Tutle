@@ -9,7 +9,7 @@
 size = Vector2(26, 12)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a7ewt"]
-radius = 248.0247
+radius = 746.386
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
 size = Vector2(106, 77.25)

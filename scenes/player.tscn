@@ -322,6 +322,7 @@ wait_time = 0.3
 one_shot = true
 
 [node name="ParryCDTimer" type="Timer" parent="." unique_id=31448954]
+wait_time = 0.7
 one_shot = true
 
 [node name="slash-miss" type="AudioStreamPlayer2D" parent="." unique_id=1988649415]

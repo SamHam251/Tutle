@@ -67,6 +67,9 @@ func took_damage() -> void:
 	combo = 0
 	killstreak = 0
 	score *= 0.8
+	
+	if player_health <= 0:
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func spawn_new_enemies() -> void:
 	var enemy_count = 1 + floor(sqrt(score) / ENEMY_COUNT_SCALING)
