@@ -61,7 +61,7 @@ func action() -> void:  # calls when ActionTimer reaches 0.
 func start_attack() -> void:  # calls when AttackTimer reaches 0.
 	sprite.modulate = Color(1, 1, 1, 1)
 	attacking = true
-	attack_hitbox.monitoring = true
+	attack_hitbox.monitorable = true
 	attack_hitbox.visible = true
 	
 	if position.x < target.position.x:
@@ -114,7 +114,7 @@ func _on_hover_range_body_exited(body: Node2D) -> void:
 
 func take_damage(damage, knockback):
 	health -= damage
-	print(health)
+	#print(health)
 	velocity.x += knockback.x
 	velocity.y += knockback.y * 0.5
 	stun_timer.start()

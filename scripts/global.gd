@@ -29,22 +29,24 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		spawn_new_enemies()
+		# print(check_for_enemies_left())
 		# score += 10000
 		# kills += 100
+	
+	if no_enemies_left():
+		spawn_new_enemies()
 	
 
 func enemy_died() -> void:
 	killstreak += 1
 	score += 50 * killstreak
 	player_health += killstreak
-	
-	print(get_tree().current_scene)
 
-func check_for_enemies_left() -> bool:
-	# var game = get_tree().current_scene()
+func no_enemies_left() -> bool:
+	var game = get_tree().current_scene
 	
-	# for child in game.root.get_children():
-		# pass
+	if game.get_tree().get_nodes_in_group("enemy"):
+		return false
 	
 	return true
 
@@ -66,11 +68,10 @@ func took_damage() -> void:
 
 func spawn_new_enemies() -> void:
 	var enemy_count = 1 + floor(sqrt(score) / ENEMY_COUNT_SCALING)
-	print(enemy_count)
 	for i in range(enemy_count):
 		var new_enemy = [enemy_ground, enemy_air].pick_random().instantiate()
 		# var new_enemy = enemy_ground.instantiate()
 		while new_enemy.position == Vector2(0, 0) or (new_enemy.position - player.position).length() < ENEMY_SPAWN_DISTANCE:
 			new_enemy.position = Vector2(randf_range(0, get_window().size.x - 50), randf_range(0, get_window().size.y - 400))
 		add_child(new_enemy)
-		print(new_enemy)
+		# print(new_enemy)

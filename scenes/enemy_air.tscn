@@ -148,7 +148,7 @@ target_position = Vector2(0, 150)
 [node name="MinHoverHeight" type="RayCast2D" parent="." unique_id=1918990650]
 target_position = Vector2(0, 65)
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=1652179083]
+[node name="HurtBox" type="Area2D" parent="." unique_id=1652179083 groups=["enemy"]]
 collision_layer = 4
 collision_mask = 0
 

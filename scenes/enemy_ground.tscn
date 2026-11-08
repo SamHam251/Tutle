@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://drq84n2imyyb2" path="res://assets/sprites/EnemySprites/Rhino charge.png" id="3_xi17v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fjjf"]
-size = Vector2(8, 25.5)
+size = Vector2(21.5, 15.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ia1lp"]
 radius = 240.5187
@@ -15,10 +15,10 @@ radius = 240.5187
 size = Vector2(264, 66)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvvuu"]
-radius = 14.5
+radius = 12.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvvuu"]
-size = Vector2(16, 38)
+size = Vector2(31.5, 25)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g4cyr"]
 atlas = ExtResource("3_xi17v")
@@ -59,9 +59,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_c5g84")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -75,18 +75,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="EnemyGround" type="CharacterBody2D" unique_id=593195625]
+[node name="EnemyGround" type="CharacterBody2D" unique_id=593195625 groups=["enemy"]]
 scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 129
 script = ExtResource("1_s4x8n")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1183939404]
+visible = false
 scale = Vector2(0.140625, 0.3125)
 texture = ExtResource("1_7k104")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=115647677]
-position = Vector2(0, 6.25)
+position = Vector2(-2.75, 5.25)
 shape = SubResource("RectangleShape2D_2fjjf")
 
 [node name="DetectionRange" type="Area2D" parent="." unique_id=156871943]
@@ -117,9 +118,10 @@ debug_color = Color(0.99999994, 0.011616092, 0.053396374, 0.41960785)
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=18133127]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=932917196]
+position = Vector2(-0.75, 0)
 shape = SubResource("RectangleShape2D_cvvuu")
 debug_color = Color(0.7, 0.47833332, 0, 0.41960785)
 
@@ -142,16 +144,17 @@ wait_time = 0.2
 one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1624192199]
-scale = Vector2(2.1666667, 2.1666667)
+position = Vector2(2.3841858e-07, 0)
+scale = Vector2(-2.167, 2.167)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"attack"
-frame_progress = 0.4541569
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
 [connection signal="body_entered" from="DashRange" to="." method="_on_dash_range_body_entered"]
 [connection signal="body_exited" from="DashRange" to="." method="_on_dash_range_body_exited"]
+[connection signal="area_entered" from="Hurtbox" to="." method="parry_check"]
 [connection signal="timeout" from="Timers/ActionTimer" to="." method="_on_action_timer_timeout"]
 [connection signal="timeout" from="Timers/DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/DashEndTimer" to="." method="end_dash"]

@@ -16,6 +16,8 @@ var facing_direction = Vector2.DOWN
 var is_attacking = false
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+@onready var Hurtbox = $Hurtbox
+
 # Knockback constants and also iframes i guess
 const KNOCKBACK = Vector2(-200, -150)  # sets your velocity to this when you take damage. sign of x-value depends on the hit direction.
 const STUN_TIME = 0.3  # time spent being kb'd after taking damage
@@ -126,6 +128,7 @@ func _physics_process(delta: float) -> void:
 		Global.parry = true
 		sprite.modulate = Color(original_color.r * 10, original_color.g * 10, original_color.b * 10, original_color.a)
 		set_collision_layer_value(8, true)
+		Hurtbox.set_collision_layer_value(8, true)
 		ParryTimer.start()
 		reset_slash()
 
@@ -145,6 +148,7 @@ func reset_parry() -> void:
 	Global.parry = false
 	Global.parried = false
 	set_collision_layer_value(8, false)
+	Hurtbox.set_collision_layer_value(8, false)
 
 func reset_slash() -> void:  # called when slash timer hits 0
 	$RightSlash.monitoring = false
@@ -191,7 +195,8 @@ func slash_attack(enemy, direction: Vector2):
 		# knockback modifiers (player only)
 		if direction.y < 0 and enemy.position.y < position.y - 50: direction.y *= 10  # undoing the enemy-only modifier
 		if enemy.name == "EnemyAir":
-			print("test")
+			#print("test")
+			pass
 		
 		# apply "kb" to player
 		lunge_vel = Vector2(direction.x * 300, direction.y * 425)
